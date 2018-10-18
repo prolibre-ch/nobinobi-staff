@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{#{% extends "admin/horaire/layout.html" %}#}
+{% load i18n %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block contentHeader %}
+{% endblock %}
+
+{% block breadCrumb %}
+  <li class="active"><a href="{% url "nobinobi_staff:staffes_list" %}">{{ title }}</a></li>
+{% endblock %}
+
+{% block PersonnelMenu %}
+  <li class="treeview active">
+    <a href="{% url "nobinobi_staff:staffes_list" %}"><i
+      class="fa fa-calendar"></i><span>{% trans "Staffes list" %}</span>
+      <i class="fa fa-circle pull-right"></i></a>
+  </li>
+{% endblock %}
+
+{% block content %}
+  <div class="content">
+    <div class="login-box-body">
+        <table class="table table-bordered table-hover table-condensed table-responsive">
+          <thead>
+          <tr>
+            <th>{% trans "First name" %}</th>
+            <th>{% trans "Last name" %}</th>
+            <th>{% trans "Phone" %}</th>
+            <th>{% trans "Mobile phone" %}</th>
+            <th>{% trans "Email" %}</th>
+          </tr>
+          </thead>
+          <tbody>
+          {% for staff in staffes %}
+            <tr>
+              <td>{{ staff.first_name|default_if_none:"-" }}</td>
+              <td>{{ staff.last_name|default_if_none:"-" }}</td>
+              <td>{{ staff.phone|default_if_none:"-" }}</td>
+              <td>{{ staff.mobile_phone|default_if_none:"-" }}</td>
+              <td>{{ staff.email|default_if_none:"-" }}</td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,79 @@
+[
+  {
+    "model": "nobinobi_staff.absencetype",
+    "pk": 1,
+    "fields": {
+      "reason": "Maladie avec certificat"
+    }
+  },
+  {
+    "model": "nobinobi_staff.absencetype",
+    "pk": 2,
+    "fields": {
+      "reason": "Maladie avec certificat tpartiel"
+    }
+  },
+  {
+    "model": "nobinobi_staff.absencetype",
+    "pk": 3,
+    "fields": {
+      "reason": "Absences non justifiées"
+    }
+  },
+  {
+    "model": "nobinobi_staff.absencetype",
+    "pk": 4,
+    "fields": {
+      "reason": "Accident avec certificat"
+    }
+  },
+  {
+    "model": "nobinobi_staff.absencetype",
+    "pk": 5,
+    "fields": {
+      "reason": "Accident avec certificat tpartiel"
+    }
+  },
+  {
+    "model": "nobinobi_staff.absencetype",
+    "pk": 6,
+    "fields": {
+      "reason": "Congé maternité"
+    }
+  },
+  {
+    "model": "nobinobi_staff.absencetype",
+    "pk": 7,
+    "fields": {
+      "reason": "Congé paternité"
+    }
+  },
+  {
+    "model": "nobinobi_staff.absencetype",
+    "pk": 8,
+    "fields": {
+      "reason": "Congé spécial (décès, mariage)"
+    }
+  },
+  {
+    "model": "nobinobi_staff.absencetype",
+    "pk": 9,
+    "fields": {
+      "reason": "Congé déménagement"
+    }
+  },
+  {
+    "model": "nobinobi_staff.absencetype",
+    "pk": 10,
+    "fields": {
+      "reason": "Congé famille (enfant malade)"
+    }
+  },
+  {
+    "model": "nobinobi_staff.absencetype",
+    "pk": 11,
+    "fields": {
+      "reason": "Formation"
+    }
+  }
+]

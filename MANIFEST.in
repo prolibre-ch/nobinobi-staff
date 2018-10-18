@@ -1,0 +1,10 @@
+include AUTHORS.rst
+include CONTRIBUTING.rst
+include HISTORY.rst
+include LICENSE
+include README.rst
+recursive-include nobinobi_staff *.html *.png *.gif *js *.css *jpg *jpeg *svg *py *json
+recursive-include nobinobi_staff/static *
+recursive-include nobinobi_staff/templates *
+recursive-include nobinobi_staff/locale *
+recursive-include nobinobi_staff/fixtures *

@@ -1,0 +1,20 @@
+# Create your views here.
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.utils.translation import gettext as _
+from django.views.generic.base import TemplateView
+
+from .models import Staff
+
+
+class ViewIndex(TemplateView):
+    template_name = 'base.html'
+
+
+class ListStaffReadOnly(TemplateView, LoginRequiredMixin, object):
+    template_name = "staff/staff_list_readonly.html"
+
+    def get(self, request, *args, **kwargs):
+        context = self.get_context_data(**kwargs)
+        context['title'] = _("Staffes list")
+        context["staffes"] = Staff.objects.filter(active=True)
+        return self.render_to_response(context)

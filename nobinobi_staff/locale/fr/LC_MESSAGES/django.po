@@ -1,0 +1,186 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-10-16 15:53+0200\n"
+"PO-Revision-Date: 2018-10-16 15:54+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 2.1.1\n"
+
+#: .\nobinobi_staff\admin.py:40 .\nobinobi_staff\admin.py:51
+msgid "Staff informations"
+msgstr "Informations personnel"
+
+#: .\nobinobi_staff\admin.py:40
+msgid "Absences"
+msgstr "Absences"
+
+#: .\nobinobi_staff\admin.py:58 .\nobinobi_staff\models.py:43
+msgid "Qualification"
+msgstr "Qualification"
+
+#: .\nobinobi_staff\admin.py:63
+msgid "Date"
+msgstr "Date"
+
+#: .\nobinobi_staff\admin.py:67
+msgid "Planning"
+msgstr "Horaire"
+
+#: .\nobinobi_staff\admin.py:69
+msgid "Occupancy rate (based on a 40-hour weekly schedule)"
+msgstr "Taux d'occupation (selon un horaire hebdomadaire de 40 heures)"
+
+#: .\nobinobi_staff\apps.py:35 .\nobinobi_staff\models.py:109
+#: .\nobinobi_staff\models.py:129
+msgid "Staff"
+msgstr "Personnel"
+
+#: .\nobinobi_staff\apps.py:36 .\nobinobi_staff\models.py:108
+msgid "Staffes"
+msgstr "Personnels"
+
+#: .\nobinobi_staff\models.py:13
+msgid "Man"
+msgstr "Homme"
+
+#: .\nobinobi_staff\models.py:14
+msgid "Woman"
+msgstr "Femme"
+
+#: .\nobinobi_staff\models.py:15
+msgid "Other"
+msgstr "Autre"
+
+#: .\nobinobi_staff\models.py:25
+msgid "user"
+msgstr "utilisateur"
+
+#: .\nobinobi_staff\models.py:29
+#: .\nobinobi_staff\templates\staff\staff_list_readonly.html:29
+msgid "Last name"
+msgstr "Nom de famille"
+
+#: .\nobinobi_staff\models.py:30
+#: .\nobinobi_staff\templates\staff\staff_list_readonly.html:28
+msgid "First name"
+msgstr "Prénom"
+
+#: .\nobinobi_staff\models.py:31
+msgid "Gender"
+msgstr "Sexe"
+
+#: .\nobinobi_staff\models.py:32
+msgid "Birthday Date"
+msgstr "Date anniversaire"
+
+#: .\nobinobi_staff\models.py:33
+msgid "Street"
+msgstr "Rue"
+
+#: .\nobinobi_staff\models.py:34
+msgid "ZIP"
+msgstr "Nip"
+
+#: .\nobinobi_staff\models.py:35
+msgid "City"
+msgstr "Ville"
+
+#: .\nobinobi_staff\models.py:36
+#: .\nobinobi_staff\templates\staff\staff_list_readonly.html:30
+msgid "Phone"
+msgstr "Téléphone"
+
+#: .\nobinobi_staff\models.py:37
+#: .\nobinobi_staff\templates\staff\staff_list_readonly.html:31
+msgid "Mobile phone"
+msgstr "Téléphone portable"
+
+#: .\nobinobi_staff\models.py:38
+msgid "AVS"
+msgstr "AVS"
+
+#: .\nobinobi_staff\models.py:39
+#: .\nobinobi_staff\templates\staff\staff_list_readonly.html:32
+msgid "Email"
+msgstr "Courriel"
+
+#: .\nobinobi_staff\models.py:48
+msgid "Percentage of work"
+msgstr "Pourcentage de travail"
+
+#: .\nobinobi_staff\models.py:49
+msgid "Working time"
+msgstr "Temps de travail"
+
+#: .\nobinobi_staff\models.py:50
+msgid "Preparation time"
+msgstr "Temps de préparation"
+
+#: .\nobinobi_staff\models.py:55
+msgid "Active"
+msgstr "Actif"
+
+#: .\nobinobi_staff\models.py:56
+msgid "Arrival date"
+msgstr "Date d’arrivée"
+
+#: .\nobinobi_staff\models.py:57
+msgid "Departure Date"
+msgstr "Date de départ"
+
+#: .\nobinobi_staff\models.py:114 .\nobinobi_staff\models.py:206
+msgid "Name"
+msgstr "Nom"
+
+#: .\nobinobi_staff\models.py:115
+msgid "Short name"
+msgstr "Nom abrégé"
+
+#: .\nobinobi_staff\models.py:116
+msgid "Order"
+msgstr "Ordre"
+
+#: .\nobinobi_staff\models.py:117
+msgid "Used by the ratio"
+msgstr "Utilisé par le ratio"
+
+#: .\nobinobi_staff\models.py:135 .\nobinobi_staff\models.py:201
+msgid "Absence type"
+msgstr "Type d'absence"
+
+#: .\nobinobi_staff\models.py:140
+msgid "Start date"
+msgstr "Date de début"
+
+#: .\nobinobi_staff\models.py:141
+msgid "End date"
+msgstr "Date de fin"
+
+#: .\nobinobi_staff\models.py:195
+msgid "Reason"
+msgstr "Raison"
+
+#: .\nobinobi_staff\models.py:202
+msgid "Absences type"
+msgstr "Types d'absences"
+
+#: .\nobinobi_staff\models.py:207
+msgid "Slug"
+msgstr "Slug"
+
+#: .\nobinobi_staff\templates\staff\staff_list_readonly.html:17
+#: .\nobinobi_staff\views.py:18
+msgid "Staffes list"
+msgstr "Liste du personnels"
