@@ -1,6 +1,6 @@
 # coding=utf-8
 import uuid
-
+import os
 import arrow
 from django.contrib.auth.models import User
 from django.db import models
@@ -8,6 +8,7 @@ from django.utils.text import slugify
 from django.utils.translation import gettext as _
 
 from model_utils import Choices
+from model_utils.models import StatusField
 
 GENDER_CHOICE = Choices(
     (0, "man", _('Man')),
@@ -137,8 +138,10 @@ class Absence(models.Model):
         blank=False,
         null=True
     )
-    start_date = models.DateField(_("Start date"))
-    end_date = models.DateField(_("End date"))
+    start_date = models.DateTimeField(_("Start date"))
+    end_date = models.DateTimeField(_("End date"))
+    all_day = models.BooleanField(_("All day"), default=False)
+    comment = models.TextField(_("Comment"), blank=True, null=True)
 
     def __str__(self):  # __unicode__ on Python 2
         return '%s %s | %s | %s - %s' % (
@@ -222,3 +225,26 @@ class Team(models.Model):
         if not self.slug:
             self.slug = self._get_unique_slug()
         super(Team, self).save(*args, **kwargs)
+
+
+class AbsenceAttachment(models.Model):
+    ATTACHMENT_TYPE = Choices(
+        ("medical", _("Medical certificate")),
+        ("work", _("Work Certificate")),
+    )
+
+    def generate_new_filename(self, filename):
+        f, ext = os.path.splitext(filename)
+        upload_to = "staff/{}/absence/".format(self.absence.staff.racc)
+        return '{}{}{}'.format(upload_to, uuid.uuid4().hex, ext)
+
+    type = StatusField(_("Type"), choices_name="ATTACHMENT_TYPE")
+    file = models.FileField(_("File"), upload_to=generate_new_filename, blank=True, null=True)
+    absence = models.ForeignKey(
+        verbose_name=_("Absence"),
+        to="Absence",
+        on_delete=models.CASCADE,
+    )
+
+    def __str__(self):
+        return "".format(self.absence, self.file)
