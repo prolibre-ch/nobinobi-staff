@@ -39,8 +39,8 @@ class StaffAdmin(admin.ModelAdmin):
         (_('Staff informations'),
          {
              'classes': ('suit-tab', 'suit-tab-info',),
-             'fields': ['first_name', 'last_name', 'gender', 'birthday_date', 'street', 'zip', 'city', 'phone',
-                        'mobile_phone', 'email', 'avs', 'active',
+             'fields': ['first_name', 'last_name', 'gender', 'birth_date', 'street', 'zip', 'city', 'phone',
+                        'mobile_phone', 'email', 'avs', 'active', 'team',
                         'user']
          }),
         (_('Qualification'),
