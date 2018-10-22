@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-10-19 10:26+0200\n"
-"PO-Revision-Date: 2018-10-19 10:27+0200\n"
+"POT-Creation-Date: 2018-10-22 11:02+0200\n"
+"PO-Revision-Date: 2018-10-22 11:02+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -26,7 +26,7 @@ msgstr "Informations personnel"
 msgid "Absences"
 msgstr "Absences"
 
-#: .\nobinobi_staff\admin.py:46 .\nobinobi_staff\models.py:44
+#: .\nobinobi_staff\admin.py:46 .\nobinobi_staff\models.py:51
 msgid "Qualification"
 msgstr "Qualification"
 
@@ -50,12 +50,12 @@ msgstr "Informations sur l'absence"
 msgid "Files"
 msgstr "Fichiers"
 
-#: .\nobinobi_staff\apps.py:33 .\nobinobi_staff\models.py:110
-#: .\nobinobi_staff\models.py:130
+#: .\nobinobi_staff\apps.py:33 .\nobinobi_staff\models.py:117
+#: .\nobinobi_staff\models.py:137
 msgid "Staff"
 msgstr "Personnel"
 
-#: .\nobinobi_staff\apps.py:34 .\nobinobi_staff\models.py:109
+#: .\nobinobi_staff\apps.py:34 .\nobinobi_staff\models.py:116
 msgid "Staffes"
 msgstr "Personnels"
 
@@ -90,8 +90,8 @@ msgid "Gender"
 msgstr "Sexe"
 
 #: .\nobinobi_staff\models.py:33
-msgid "Birthday Date"
-msgstr "Date anniversaire"
+msgid "Birth Date"
+msgstr "Date de naissance"
 
 #: .\nobinobi_staff\models.py:34
 msgid "Street"
@@ -124,95 +124,99 @@ msgstr "AVS"
 msgid "Email"
 msgstr "Courriel"
 
-#: .\nobinobi_staff\models.py:49
+#: .\nobinobi_staff\models.py:43
+msgid "Team"
+msgstr ""
+
+#: .\nobinobi_staff\models.py:56
 msgid "Percentage of work"
 msgstr "Pourcentage de travail"
 
-#: .\nobinobi_staff\models.py:50
+#: .\nobinobi_staff\models.py:57
 msgid "Working time"
 msgstr "Temps de travail"
 
-#: .\nobinobi_staff\models.py:51
+#: .\nobinobi_staff\models.py:58
 msgid "Preparation time"
 msgstr "Temps de préparation"
 
-#: .\nobinobi_staff\models.py:56
+#: .\nobinobi_staff\models.py:63
 msgid "Active"
 msgstr "Actif"
 
-#: .\nobinobi_staff\models.py:57
+#: .\nobinobi_staff\models.py:64
 msgid "Arrival date"
 msgstr "Date d’arrivée"
 
-#: .\nobinobi_staff\models.py:58
+#: .\nobinobi_staff\models.py:65
 msgid "Departure Date"
 msgstr "Date de départ"
 
-#: .\nobinobi_staff\models.py:115 .\nobinobi_staff\models.py:209
+#: .\nobinobi_staff\models.py:122 .\nobinobi_staff\models.py:216
 msgid "Name"
 msgstr "Nom"
 
-#: .\nobinobi_staff\models.py:116
+#: .\nobinobi_staff\models.py:123
 msgid "Short name"
 msgstr "Nom abrégé"
 
-#: .\nobinobi_staff\models.py:117
+#: .\nobinobi_staff\models.py:124
 msgid "Order"
 msgstr "Ordre"
 
-#: .\nobinobi_staff\models.py:118
+#: .\nobinobi_staff\models.py:125
 msgid "Used by the ratio"
 msgstr "Utilisé par le ratio"
 
-#: .\nobinobi_staff\models.py:136 .\nobinobi_staff\models.py:204
+#: .\nobinobi_staff\models.py:143 .\nobinobi_staff\models.py:211
 msgid "Absence type"
 msgstr "Type d'absence"
 
-#: .\nobinobi_staff\models.py:141
+#: .\nobinobi_staff\models.py:148
 msgid "Start date"
 msgstr "Date de début"
 
-#: .\nobinobi_staff\models.py:142
+#: .\nobinobi_staff\models.py:149
 msgid "End date"
 msgstr "Date de fin"
 
-#: .\nobinobi_staff\models.py:143
+#: .\nobinobi_staff\models.py:150
 msgid "All day"
 msgstr "Toute la journée"
 
-#: .\nobinobi_staff\models.py:144
+#: .\nobinobi_staff\models.py:151
 msgid "Comment"
 msgstr "Commentaire"
 
-#: .\nobinobi_staff\models.py:198
+#: .\nobinobi_staff\models.py:205
 msgid "Reason"
 msgstr "Raison"
 
-#: .\nobinobi_staff\models.py:205
+#: .\nobinobi_staff\models.py:212
 msgid "Absences type"
 msgstr "Types d'absences"
 
-#: .\nobinobi_staff\models.py:210
+#: .\nobinobi_staff\models.py:217
 msgid "Slug"
 msgstr "Slug"
 
-#: .\nobinobi_staff\models.py:232
+#: .\nobinobi_staff\models.py:239
 msgid "Medical certificate"
 msgstr "Certificat médical"
 
-#: .\nobinobi_staff\models.py:233
+#: .\nobinobi_staff\models.py:240
 msgid "Work Certificate"
 msgstr "Certificat de travail"
 
-#: .\nobinobi_staff\models.py:241
+#: .\nobinobi_staff\models.py:248
 msgid "Type"
 msgstr "Type"
 
-#: .\nobinobi_staff\models.py:242
+#: .\nobinobi_staff\models.py:249
 msgid "File"
 msgstr "Fichier"
 
-#: .\nobinobi_staff\models.py:244
+#: .\nobinobi_staff\models.py:251
 msgid "Absence"
 msgstr "Absence"
 

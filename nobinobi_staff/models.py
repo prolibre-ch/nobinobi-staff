@@ -30,7 +30,7 @@ class Staff(models.Model):
     last_name = models.CharField(_("Last name"), max_length=255)
     first_name = models.CharField(_("First name"), max_length=255)
     gender = models.SmallIntegerField(choices=GENDER_CHOICE, verbose_name=_("Gender"), blank=False, null=True)
-    birthday_date = models.DateField(verbose_name=_("Birthday Date"), blank=True, null=True)
+    birth_date = models.DateField(verbose_name=_("Birth Date"), blank=True, null=True)
     street = models.CharField(_('Street'), max_length=255, null=True, blank=True)
     zip = models.PositiveIntegerField(_('ZIP'), null=True, blank=True)
     city = models.CharField(_('City'), max_length=50, null=True, blank=True)
@@ -38,6 +38,13 @@ class Staff(models.Model):
     mobile_phone = models.CharField(_('Mobile phone'), max_length=50, null=True, blank=True)
     avs = models.CharField(_('AVS'), max_length=16, null=True, blank=True)
     email = models.EmailField(_('Email'), null=True, blank=True)
+    team = models.ForeignKey(
+        to="Team",
+        verbose_name=_('Team'),
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True
+    )
 
     qualification = models.ForeignKey(
         'Qualification',
