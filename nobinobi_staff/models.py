@@ -1,6 +1,6 @@
 # coding=utf-8
 import uuid
-
+import os
 import arrow
 from django.contrib.auth.models import User
 from django.db import models
@@ -8,6 +8,7 @@ from django.utils.text import slugify
 from django.utils.translation import gettext as _
 
 from model_utils import Choices
+from model_utils.models import StatusField
 
 GENDER_CHOICE = Choices(
     (0, "man", _('Man')),
@@ -29,7 +30,7 @@ class Staff(models.Model):
     last_name = models.CharField(_("Last name"), max_length=255)
     first_name = models.CharField(_("First name"), max_length=255)
     gender = models.SmallIntegerField(choices=GENDER_CHOICE, verbose_name=_("Gender"), blank=False, null=True)
-    birthday_date = models.DateField(verbose_name=_("Birthday Date"), blank=True, null=True)
+    birth_date = models.DateField(verbose_name=_("Birth Date"), blank=True, null=True)
     street = models.CharField(_('Street'), max_length=255, null=True, blank=True)
     zip = models.PositiveIntegerField(_('ZIP'), null=True, blank=True)
     city = models.CharField(_('City'), max_length=50, null=True, blank=True)
@@ -37,6 +38,13 @@ class Staff(models.Model):
     mobile_phone = models.CharField(_('Mobile phone'), max_length=50, null=True, blank=True)
     avs = models.CharField(_('AVS'), max_length=16, null=True, blank=True)
     email = models.EmailField(_('Email'), null=True, blank=True)
+    team = models.ForeignKey(
+        to="Team",
+        verbose_name=_('Team'),
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True
+    )
 
     qualification = models.ForeignKey(
         'Qualification',
@@ -137,8 +145,10 @@ class Absence(models.Model):
         blank=False,
         null=True
     )
-    start_date = models.DateField(_("Start date"))
-    end_date = models.DateField(_("End date"))
+    start_date = models.DateTimeField(_("Start date"))
+    end_date = models.DateTimeField(_("End date"))
+    all_day = models.BooleanField(_("All day"), default=False)
+    comment = models.TextField(_("Comment"), blank=True, null=True)
 
     def __str__(self):  # __unicode__ on Python 2
         return '%s %s | %s | %s - %s' % (
@@ -222,3 +232,26 @@ class Team(models.Model):
         if not self.slug:
             self.slug = self._get_unique_slug()
         super(Team, self).save(*args, **kwargs)
+
+
+class AbsenceAttachment(models.Model):
+    ATTACHMENT_TYPE = Choices(
+        ("medical", _("Medical certificate")),
+        ("work", _("Work Certificate")),
+    )
+
+    def generate_new_filename(self, filename):
+        f, ext = os.path.splitext(filename)
+        upload_to = "staff/{}/absence/".format(self.absence.staff.racc)
+        return '{}{}{}'.format(upload_to, uuid.uuid4().hex, ext)
+
+    type = StatusField(_("Type"), choices_name="ATTACHMENT_TYPE")
+    file = models.FileField(_("File"), upload_to=generate_new_filename, blank=True, null=True)
+    absence = models.ForeignKey(
+        verbose_name=_("Absence"),
+        to="Absence",
+        on_delete=models.CASCADE,
+    )
+
+    def __str__(self):
+        return "".format(self.absence, self.file)
