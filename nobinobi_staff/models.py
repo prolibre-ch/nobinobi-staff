@@ -216,7 +216,7 @@ class AbsenceType(models.Model):
 class Team(models.Model):
     name = models.CharField(verbose_name=_("Name"), max_length=100)
     slug = models.SlugField(verbose_name=_("Slug"), max_length=150, unique=True)
-    order = models.PositiveIntegerField(verbose_name=_("Order"), unique=True)
+    order = models.PositiveIntegerField(verbose_name=_("Order"), unique=True, blank=False, null=True)
 
     def __str__(self):
         return self.name
@@ -230,18 +230,9 @@ class Team(models.Model):
             num += 1
         return unique_slug
 
-    def _get_new_default(self):
-        if Team.objects.all().count() == 0:
-            new_order_default = 1
-        else:
-            new_order_default = Team.objects.all().aggregate(max('order'))['order__max'] + 1
-        return new_order_default
-
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = self._get_unique_slug()
-        if not self.order:
-            self.order = self._get_new_default()
         super(Team, self).save(*args, **kwargs)
 
 

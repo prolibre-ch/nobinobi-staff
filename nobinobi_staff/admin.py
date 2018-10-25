@@ -245,8 +245,8 @@ class QualificationAdmin(admin.ModelAdmin):
 
 @admin.register(Team)
 class TeamAdmin(admin.ModelAdmin):
-    list_display = ('name', 'slug')
-    list_filter = ('name',)
+    list_display = ('name', 'slug', 'order')
+    list_filter = ('name', 'order')
     readonly_fields = ("slug",)
-    ordering = ('name',)
+    ordering = ('order', 'name',)
     search_fields = ('name',)
