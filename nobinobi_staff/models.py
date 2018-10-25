@@ -1,12 +1,12 @@
 # coding=utf-8
-import uuid
 import os
+import uuid
+
 import arrow
 from django.contrib.auth.models import User
 from django.db import models
 from django.utils.text import slugify
 from django.utils.translation import gettext as _
-
 from model_utils import Choices
 from model_utils.models import StatusField
 
@@ -63,6 +63,7 @@ class Staff(models.Model):
     active = models.BooleanField(verbose_name=_("Active"), default=True)
     arrival_date = models.DateField(_("Arrival date"), null=True)
     departure_date = models.DateField(_("Departure Date"), null=True, blank=True)
+
     # date_desactivation = models.DateField(_("Date de désactivation"), null=True, blank=True)
     # date_reactivation = models.DateField(_("Date de réactivation"), null=True, blank=True)
     # heure_sup = models.FloatField(_("Heure supplémentaire"), default=0)
@@ -163,7 +164,7 @@ class Absence(models.Model):
     def save(self, *args, **kwargs):
         """What to do when we modify or create"""
         super(Absence, self).save(*args, **kwargs)
-        #FIXME: a remettre
+        # FIXME: a remettre
 
         # if settings.ENABLE_POINTAGE:
         #     today = arrow.utcnow().date()
@@ -183,7 +184,7 @@ class Absence(models.Model):
     def delete(self, *args, **kwargs):
         """Delete the model"""
         super(Absence, self).delete(*args, **kwargs)
-        #FIXME: a remettre
+        # FIXME: a remettre
         # if settings.ENABLE_POINTAGE:
         #
         #     today = arrow.utcnow().date()
@@ -215,6 +216,7 @@ class AbsenceType(models.Model):
 class Team(models.Model):
     name = models.CharField(verbose_name=_("Name"), max_length=100)
     slug = models.SlugField(verbose_name=_("Slug"), max_length=150, unique=True)
+    order = models.PositiveIntegerField(verbose_name=_("Order"), unique=True)
 
     def __str__(self):
         return self.name
@@ -228,9 +230,18 @@ class Team(models.Model):
             num += 1
         return unique_slug
 
+    def _get_new_default(self):
+        if Team.objects.all().count() == 0:
+            new_order_default = 1
+        else:
+            new_order_default = Team.objects.all().aggregate(max('order'))['order__max'] + 1
+        return new_order_default
+
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = self._get_unique_slug()
+        if not self.order:
+            self.order = self._get_new_default()
         super(Team, self).save(*args, **kwargs)
 
 
