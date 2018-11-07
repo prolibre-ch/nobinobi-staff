@@ -27,14 +27,13 @@ class StaffAdmin(admin.ModelAdmin):
 
     suit_form_tabs = (('info', _('Staff informations')), ('absences', _('Absences')),)
     list_display = (
-        'last_name', 'first_name', 'qualification', 'percentage_work', 'working_time', 'preparation_time',
-        'active'
+        'last_name', 'first_name', 'qualification', 'percentage_work', 'working_time', 'active'
     )
     list_filter = ('active', 'last_name', 'first_name')
     ordering = ('last_name',)
     inlines = (AbsenceInline,)
     search_fields = ('last_name', 'first_name')
-    readonly_fields = ('working_time', 'preparation_time',)
+    readonly_fields = ('working_time', )
     fieldsets = [
         (_('Staff informations'),
          {
@@ -55,7 +54,7 @@ class StaffAdmin(admin.ModelAdmin):
         (_('Planning'), {
             'classes': ('suit-tab', 'suit-tab-info',),
             'description': _("Occupancy rate (based on a 40-hour weekly schedule)"),
-            'fields': ['percentage_work', 'working_time', 'preparation_time']
+            'fields': ['percentage_work', 'working_time']
         }), ]
 
     # TODO:VOIR POUR SI NECCESAIRE
@@ -237,10 +236,10 @@ class AbsenceTypeAdmin(admin.ModelAdmin):
 
 @admin.register(Qualification)
 class QualificationAdmin(admin.ModelAdmin):
-    list_filter = ('name', 'short_name', 'order', 'used_ratio')
-    list_display = ('name', 'short_name', 'order', 'used_ratio')
+    list_filter = ('name', 'short_name', 'order',)
+    list_display = ('name', 'short_name', 'order',)
     ordering = ('order', 'name',)
-    search_fields = ('name', 'short_name', 'used_ratio')
+    search_fields = ('name', 'short_name',)
 
 
 @admin.register(Team)
