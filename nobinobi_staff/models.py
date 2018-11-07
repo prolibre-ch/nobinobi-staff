@@ -55,7 +55,6 @@ class Staff(models.Model):
     )
     percentage_work = models.FloatField(verbose_name=_("Percentage of work"), default=0)
     working_time = models.FloatField(_("Working time"))
-    preparation_time = models.FloatField(_("Preparation time"), default=0)
     # recorded_time = models.FloatField(_("Temps enregistré"), default=0)
     # temps_prep_enregistre = models.FloatField(_("Temps de préparation enregistré"), default=0)
     # absence = models.BooleanField(_("Absence"), default=False)
@@ -91,24 +90,24 @@ class Staff(models.Model):
         self.last_name = self.last_name.title()
         self.first_name = self.first_name.title()
         percentage = self.percentage_work
-        qualification = self.qualification_id
+        # qualification = self.qualification_id
         # on check si le percentage est entre 0 et 100
         if percentage <= 100 or percentage > 0:
             # on init les valeurs constantes
             base_work = 40
-            preparation_times = 0
+            # preparation_times = 0
             # on defini le travail
             work = (percentage / 100) * base_work
             # on check si categorie = 1:Educatrice diplome, 2: ASE, 3. Auxiliaire
-            if qualification in [1, 2, 3]:
+            # if qualification in [1, 2, 3]:
                 # on set le temps de preparation
                 #  codage pour un arrondisement au 0.25 pres
-                preparation_times = round(4 * (work * (10 / 100))) / 4
+                # preparation_times = round(4 * (work * (10 / 100))) / 4
                 # et on reedite le travail
-                work -= preparation_times
+                # work -= preparation_times
 
             self.working_time = work
-            self.preparation_time = preparation_times
+            # self.preparation_time = preparation_times
 
         super(Staff, self).save(*args, **kwargs)
 
@@ -123,7 +122,6 @@ class Qualification(models.Model):
     name = models.TextField(_("Name"))
     short_name = models.CharField(_("Short name"), max_length=255)
     order = models.IntegerField(_("Order"), default=1)
-    used_ratio = models.BooleanField(_("Used by the ratio"), default=False)
 
     class Meta:
         ordering = ('order',)
