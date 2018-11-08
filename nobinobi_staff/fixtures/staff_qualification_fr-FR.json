@@ -5,8 +5,7 @@
     "fields": {
       "name": "\u00c9ducatrice diplom\u00e9e",
       "short_name": "EDE",
-      "order": 1,
-      "used_ratio": true
+      "order": 1
     }
   },
   {
@@ -15,8 +14,7 @@
     "fields": {
       "name": "ASE",
       "short_name": "ASE",
-      "order": 2,
-      "used_ratio": true
+      "order": 2
     }
   },
   {
@@ -25,8 +23,7 @@
     "fields": {
       "name": "Auxiliaire",
       "short_name": "AUX",
-      "order": 3,
-      "used_ratio": true
+      "order": 3
     }
   },
   {
@@ -35,8 +32,7 @@
     "fields": {
       "name": "Aide",
       "short_name": "AIDE",
-      "order": 4,
-      "used_ratio": true
+      "order": 4
     }
   },
   {
