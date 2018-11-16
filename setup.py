@@ -56,7 +56,9 @@ setup(
         'nobinobi_staff',
     ],
     include_package_data=True,
-    install_requires=["django-model-utils>=2.0", "arrow>=0.12"],
+    install_requires=["django-model-utils>=2.0", "arrow>=0.12", "django-crispy-forms>=1.7.0",
+                      "django-extensions>=2.1.3",],
+    dependency_links=['http://fadia.lan.prolibre.com:10080/alu/nobinobi-core/archive/master.tar.gz#egg=nobinobi-core-0.1.0'],
     zip_safe=False,
     keywords='nobinobi-staff',
     classifiers=[
