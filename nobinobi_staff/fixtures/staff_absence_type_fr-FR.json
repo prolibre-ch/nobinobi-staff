@@ -3,77 +3,88 @@
     "model": "nobinobi_staff.absencetype",
     "pk": 1,
     "fields": {
-      "reason": "Maladie avec certificat"
+      "reason": "Absence non justifiée",
+      "abbr": "ABS"
     }
   },
   {
     "model": "nobinobi_staff.absencetype",
     "pk": 2,
     "fields": {
-      "reason": "Maladie avec certificat tpartiel"
+      "reason": "Maladie",
+      "abbr": "MAL"
     }
   },
   {
     "model": "nobinobi_staff.absencetype",
     "pk": 3,
     "fields": {
-      "reason": "Absences non justifiées"
+      "reason": "Accident",
+      "abbr": "ACC"
     }
   },
   {
     "model": "nobinobi_staff.absencetype",
     "pk": 4,
     "fields": {
-      "reason": "Accident avec certificat"
+      "reason": "Congé sans solde",
+      "abbr": "CSS"
     }
   },
   {
     "model": "nobinobi_staff.absencetype",
     "pk": 5,
     "fields": {
-      "reason": "Accident avec certificat tpartiel"
+      "reason": "Congé maternité (20 semaines)",
+      "abbr": "MAT"
     }
   },
   {
     "model": "nobinobi_staff.absencetype",
     "pk": 6,
     "fields": {
-      "reason": "Congé maternité"
+      "reason": "Congé paternité",
+      "abbr": "PAT"
     }
   },
   {
     "model": "nobinobi_staff.absencetype",
     "pk": 7,
     "fields": {
-      "reason": "Congé paternité"
+      "reason": "Congé spécial (décès, mariage)",
+      "abbr": "CSP"
     }
   },
   {
     "model": "nobinobi_staff.absencetype",
     "pk": 8,
     "fields": {
-      "reason": "Congé spécial (décès, mariage)"
+      "reason": "Déménagement",
+      "abbr": "CDE"
     }
   },
   {
     "model": "nobinobi_staff.absencetype",
     "pk": 9,
     "fields": {
-      "reason": "Congé déménagement"
+      "reason": "Congé familial (enfant malade)",
+      "abbr": "CFA"
     }
   },
   {
     "model": "nobinobi_staff.absencetype",
     "pk": 10,
     "fields": {
-      "reason": "Congé famille (enfant malade)"
+      "reason": "Formation",
+      "abbr": "FOR"
     }
   },
   {
     "model": "nobinobi_staff.absencetype",
     "pk": 11,
     "fields": {
-      "reason": "Formation"
+      "reason": "Vacances",
+      "abbr": "VAC"
     }
   }
 ]

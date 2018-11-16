@@ -5,6 +5,7 @@ import uuid
 import arrow
 from django.contrib.auth.models import User
 from django.db import models
+from django.db.models.functions import Upper
 from django.utils.text import slugify
 from django.utils.translation import gettext as _
 from model_utils import Choices
@@ -100,11 +101,11 @@ class Staff(models.Model):
             work = (percentage / 100) * base_work
             # on check si categorie = 1:Educatrice diplome, 2: ASE, 3. Auxiliaire
             # if qualification in [1, 2, 3]:
-                # on set le temps de preparation
-                #  codage pour un arrondisement au 0.25 pres
-                # preparation_times = round(4 * (work * (10 / 100))) / 4
-                # et on reedite le travail
-                # work -= preparation_times
+            # on set le temps de preparation
+            #  codage pour un arrondisement au 0.25 pres
+            # preparation_times = round(4 * (work * (10 / 100))) / 4
+            # et on reedite le travail
+            # work -= preparation_times
 
             self.working_time = work
             # self.preparation_time = preparation_times
@@ -202,19 +203,31 @@ class Absence(models.Model):
 
 class AbsenceType(models.Model):
     reason = models.CharField(_("Reason"), max_length=255)
-
-    def __str__(self):  # __unicode__ on Python 2
-        return self.reason
+    abbr = models.CharField(_("Abbreviation"), max_length=3,default="000")
 
     class Meta:
         verbose_name = _("Absence type")
         verbose_name_plural = _("Absences type")
+
+    def __str__(self):  # __unicode__ on Python 2
+        return "{} - {}".format(self.abbr, self.reason)
+
+    def save(self, force_insert=False, force_update=False, using=None,
+             update_fields=None):
+        # save abbreviation in CAPITAL
+        if self.abbr:
+            Upper(self.abbr)
+        return super(AbsenceType, self).save()
 
 
 class Team(models.Model):
     name = models.CharField(verbose_name=_("Name"), max_length=100)
     slug = models.SlugField(verbose_name=_("Slug"), max_length=150, unique=True)
     order = models.PositiveIntegerField(verbose_name=_("Order"), unique=True, blank=False, null=True)
+
+    class Meta:
+        verbose_name = _("Team")
+        verbose_name_plural = _("Teams")
 
     def __str__(self):
         return self.name
@@ -252,6 +265,10 @@ class AbsenceAttachment(models.Model):
         to="Absence",
         on_delete=models.CASCADE,
     )
+
+    class Meta:
+        verbose_name = _("Absence attachment")
+        verbose_name_plural = _("Absence attachments")
 
     def __str__(self):
         return "".format(self.absence, self.file)
