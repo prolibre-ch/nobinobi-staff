@@ -24,7 +24,6 @@ def load_group_and_permissions(sender, **kwargs):
 
 def load_fixtures_personal(sender, **kwargs):
     from django.core.management import call_command
-    call_command("loaddata", "staff_qualification_{}".format(settings.LANGUAGE_CODE))
     call_command("loaddata", "staff_absence_type_{}".format(settings.LANGUAGE_CODE))
 
 
