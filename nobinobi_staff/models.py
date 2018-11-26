@@ -56,6 +56,8 @@ class Staff(models.Model):
     )
     percentage_work = models.FloatField(verbose_name=_("Percentage of work"), default=0)
     working_time = models.FloatField(_("Working time"))
+    working_base = models.FloatField(verbose_name=_("Working base"), default=40)
+
     # recorded_time = models.FloatField(_("Temps enregistré"), default=0)
     # temps_prep_enregistre = models.FloatField(_("Temps de préparation enregistré"), default=0)
     # absence = models.BooleanField(_("Absence"), default=False)
@@ -95,20 +97,10 @@ class Staff(models.Model):
         # on check si le percentage est entre 0 et 100
         if percentage <= 100 or percentage > 0:
             # on init les valeurs constantes
-            base_work = 40
-            # preparation_times = 0
+            base_work = self.working_base
             # on defini le travail
             work = (percentage / 100) * base_work
-            # on check si categorie = 1:Educatrice diplome, 2: ASE, 3. Auxiliaire
-            # if qualification in [1, 2, 3]:
-            # on set le temps de preparation
-            #  codage pour un arrondisement au 0.25 pres
-            # preparation_times = round(4 * (work * (10 / 100))) / 4
-            # et on reedite le travail
-            # work -= preparation_times
-
             self.working_time = work
-            # self.preparation_time = preparation_times
 
         super(Staff, self).save(*args, **kwargs)
 
