@@ -83,7 +83,7 @@
     "model": "nobinobi_staff.absencetype",
     "pk": 11,
     "fields": {
-      "reason": "Vacance",
+      "reason": "Vacances",
       "abbr": "VAC"
     }
   }
