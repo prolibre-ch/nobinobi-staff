@@ -143,8 +143,8 @@ class Absence(models.Model):
     comment = models.TextField(_("Comment"), blank=True, null=True)
 
     def __str__(self):  # __unicode__ on Python 2
-        return '%s %s | %s | %s - %s' % (
-            self.staff.first_name, self.staff.last_name, self.abs_type, arrow.get(self.start_date).format("DD-MM-YYYY"),
+        return '%s | %s | %s - %s' % (
+            self.staff, self.abs_type, arrow.get(self.start_date).format("DD-MM-YYYY"),
             arrow.get(self.end_date).format("DD-MM-YYYY"))
 
     def _get_range_absence(self):

@@ -1,17 +1,46 @@
 # coding=utf-8
-
+import arrow
 from django.contrib import admin
 from django.contrib.admin import StackedInline
+from django.core.exceptions import ValidationError, NON_FIELD_ERRORS
+from django.forms import BaseInlineFormSet
 from django.utils.translation import gettext as _
+from nobinobi_core.functions import AdminInlineWithSelectRelated
 
 from .models import Absence, Qualification, Team, Staff, AbsenceType, AbsenceAttachment
 
 
-class AbsenceInline(StackedInline):
+class InlineAbsenceFormset(BaseInlineFormSet):
+    def clean(self):
+        super(InlineAbsenceFormset, self).clean()
+        errors = []
+        for form in self.forms:
+            try:
+                form.cleaned_data['start_date']
+            except KeyError:
+                form.cleaned_data["start_date"] = arrow.now().datetime
+            else:
+                if form.cleaned_data["start_date"] > form.cleaned_data["end_date"]:
+                    msg = _("The start date is greater than the end date.")
+                    errors.append(msg)
+                    form._errors[NON_FIELD_ERRORS] = self.error_class([msg])
+
+        if errors:
+            raise ValidationError(errors)
+
+
+class AbsenceInline(AdminInlineWithSelectRelated, StackedInline):
     model = Absence
     extra = 0
     verbose_name_plural = 'Absences'
     suit_classes = 'suit-tab suit-tab-absences'
+    # raw_id_fields = ("abs_type",)
+    suit_form_inlines_hide_original = True
+    list_select_related = [
+        "abs_type",
+        "staff",
+    ]
+    formset = InlineAbsenceFormset  # line to add
 
 
 class AbsenceAttachmentInline(StackedInline):
@@ -125,6 +154,7 @@ class AbsenceAdmin(admin.ModelAdmin):
              'fields': ['comment'],
          }),
     ]
+
 
 @admin.register(AbsenceType)
 class AbsenceTypeAdmin(admin.ModelAdmin):
