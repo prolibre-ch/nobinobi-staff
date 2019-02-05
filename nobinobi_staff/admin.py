@@ -7,6 +7,7 @@ from django.forms import BaseInlineFormSet
 from django.utils.translation import gettext as _
 from nobinobi_core.functions import AdminInlineWithSelectRelated
 
+from nobinobi_staff.forms import AbsenceAdminForm
 from .models import Absence, Qualification, Team, Staff, AbsenceType, AbsenceAttachment
 
 
@@ -41,6 +42,7 @@ class AbsenceInline(AdminInlineWithSelectRelated, StackedInline):
         "staff",
     ]
     formset = InlineAbsenceFormset  # line to add
+    form = AbsenceAdminForm
 
 
 class AbsenceAttachmentInline(StackedInline):
@@ -131,6 +133,7 @@ class StaffAdmin(admin.ModelAdmin):
 
 @admin.register(Absence)
 class AbsenceAdmin(admin.ModelAdmin):
+    form = AbsenceAdminForm
     suit_form_tabs = (('info', _('Absence informations')), ('file', _('Files')),)
     inlines = (AbsenceAttachmentInline,)
     list_filter = ('abs_type', 'start_date', 'end_date')
@@ -154,7 +157,6 @@ class AbsenceAdmin(admin.ModelAdmin):
              'fields': ['comment'],
          }),
     ]
-
 
 @admin.register(AbsenceType)
 class AbsenceTypeAdmin(admin.ModelAdmin):
