@@ -82,7 +82,8 @@ class Staff(models.Model):
 
     racc = property(_get_racc_name)
 
-    def get_full_name(self):
+    @property
+    def full_name(self):
         return "{0} {1}".format(self.first_name, self.last_name)
 
     def __str__(self):  # __unicode__ on Python 2
