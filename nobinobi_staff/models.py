@@ -5,6 +5,7 @@ import uuid
 import arrow
 from django.contrib.auth.models import User
 from django.db import models
+from django.db.models.functions import Upper
 from django.utils.text import slugify
 from django.utils.translation import gettext as _
 from model_utils import Choices
@@ -55,6 +56,8 @@ class Staff(models.Model):
     )
     percentage_work = models.FloatField(verbose_name=_("Percentage of work"), default=0)
     working_time = models.FloatField(_("Working time"))
+    working_base = models.FloatField(verbose_name=_("Working base"), default=40)
+
     # recorded_time = models.FloatField(_("Temps enregistré"), default=0)
     # temps_prep_enregistre = models.FloatField(_("Temps de préparation enregistré"), default=0)
     # absence = models.BooleanField(_("Absence"), default=False)
@@ -79,7 +82,8 @@ class Staff(models.Model):
 
     racc = property(_get_racc_name)
 
-    def get_full_name(self):
+    @property
+    def full_name(self):
         return "{0} {1}".format(self.first_name, self.last_name)
 
     def __str__(self):  # __unicode__ on Python 2
@@ -94,20 +98,10 @@ class Staff(models.Model):
         # on check si le percentage est entre 0 et 100
         if percentage <= 100 or percentage > 0:
             # on init les valeurs constantes
-            base_work = 40
-            # preparation_times = 0
+            base_work = self.working_base
             # on defini le travail
             work = (percentage / 100) * base_work
-            # on check si categorie = 1:Educatrice diplome, 2: ASE, 3. Auxiliaire
-            # if qualification in [1, 2, 3]:
-                # on set le temps de preparation
-                #  codage pour un arrondisement au 0.25 pres
-                # preparation_times = round(4 * (work * (10 / 100))) / 4
-                # et on reedite le travail
-                # work -= preparation_times
-
             self.working_time = work
-            # self.preparation_time = preparation_times
 
         super(Staff, self).save(*args, **kwargs)
 
@@ -150,8 +144,8 @@ class Absence(models.Model):
     comment = models.TextField(_("Comment"), blank=True, null=True)
 
     def __str__(self):  # __unicode__ on Python 2
-        return '%s %s | %s | %s - %s' % (
-            self.staff.first_name, self.staff.last_name, self.abs_type, arrow.get(self.start_date).format("DD-MM-YYYY"),
+        return '%s | %s | %s - %s' % (
+            self.staff, self.abs_type, arrow.get(self.start_date).format("DD-MM-YYYY"),
             arrow.get(self.end_date).format("DD-MM-YYYY"))
 
     def _get_range_absence(self):
@@ -202,19 +196,31 @@ class Absence(models.Model):
 
 class AbsenceType(models.Model):
     reason = models.CharField(_("Reason"), max_length=255)
-
-    def __str__(self):  # __unicode__ on Python 2
-        return self.reason
+    abbr = models.CharField(_("Abbreviation"), max_length=3,default="000")
 
     class Meta:
         verbose_name = _("Absence type")
         verbose_name_plural = _("Absences type")
+
+    def __str__(self):  # __unicode__ on Python 2
+        return "{} - {}".format(self.abbr, self.reason)
+
+    def save(self, force_insert=False, force_update=False, using=None,
+             update_fields=None):
+        # save abbreviation in CAPITAL
+        if self.abbr:
+            Upper(self.abbr)
+        return super(AbsenceType, self).save()
 
 
 class Team(models.Model):
     name = models.CharField(verbose_name=_("Name"), max_length=100)
     slug = models.SlugField(verbose_name=_("Slug"), max_length=150, unique=True)
     order = models.PositiveIntegerField(verbose_name=_("Order"), unique=True, blank=False, null=True)
+
+    class Meta:
+        verbose_name = _("Team")
+        verbose_name_plural = _("Teams")
 
     def __str__(self):
         return self.name
@@ -252,6 +258,10 @@ class AbsenceAttachment(models.Model):
         to="Absence",
         on_delete=models.CASCADE,
     )
+
+    class Meta:
+        verbose_name = _("Absence attachment")
+        verbose_name_plural = _("Absence attachments")
 
     def __str__(self):
         return "".format(self.absence, self.file)

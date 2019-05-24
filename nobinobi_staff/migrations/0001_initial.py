@@ -41,7 +41,6 @@ class Migration(migrations.Migration):
                 ('name', models.TextField(verbose_name='Nom')),
                 ('short_name', models.CharField(max_length=255, verbose_name='Short name')),
                 ('order', models.IntegerField(default=1, verbose_name='Ordre')),
-                ('used_ratio', models.BooleanField(default=False, verbose_name='Used by the ratio')),
             ],
             options={
                 'ordering': ('order',),
@@ -64,7 +63,6 @@ class Migration(migrations.Migration):
                 ('email', models.EmailField(blank=True, max_length=254, null=True, verbose_name='Courriel')),
                 ('percentage_work', models.FloatField(default=0, verbose_name='Percentage of work')),
                 ('working_time', models.FloatField(verbose_name='Working time')),
-                ('preparation_time', models.FloatField(default=0, verbose_name='Preparation time')),
                 ('active', models.BooleanField(default=True, verbose_name='active')),
                 ('arrival_date', models.DateField(null=True, verbose_name='Arrival date')),
                 ('departure_date', models.DateField(blank=True, null=True, verbose_name='Departure Date')),
