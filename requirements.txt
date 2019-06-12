@@ -1,8 +1,9 @@
 django-simple-rest>=1.4.0
+djangorestframework>=3.9.3
 django>=2.0,<2.1
 django-model-utils>=2.0
 # Additional requirements go here
-git+ssh://gitolite@homer.lan.prolibre.com:8022/nobinobi-core/nobinobi-core.git@master#egg=nobinobi-core
+git+ssh://gitolite@git.prolibre.com:8022/nobinobi-core/nobinobi-core.git@master#egg=nobinobi-core
 git+https://github.com/darklow/django-suit.git # django-suit>=2.0a1
 arrow>=0.12
 django-crispy-forms>=1.7.0
