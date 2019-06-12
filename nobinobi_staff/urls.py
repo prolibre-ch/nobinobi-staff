@@ -13,12 +13,19 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.urls import path
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+
+from nobinobi_staff import views
 
 from .views import ListStaffReadOnly
 
 app_name = 'nobinobi_staff'
 
+router = DefaultRouter()
+router.register(r'staff', views.StaffViewSet)
+
 urlpatterns = [
+    path('api/', include(router.urls)),
     path('list/', ListStaffReadOnly.as_view(), name="staffes_list")
 ]
