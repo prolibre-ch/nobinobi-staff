@@ -2,7 +2,9 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils.translation import gettext as _
 from django.views.generic.base import TemplateView
+from rest_framework import viewsets
 
+from nobinobi_staff.serializers import StaffSerializer
 from .models import Staff
 
 
@@ -18,3 +20,8 @@ class ListStaffReadOnly(TemplateView, LoginRequiredMixin, object):
         context['title'] = _("Staffes list")
         context["staffes"] = Staff.objects.filter(active=True)
         return self.render_to_response(context)
+
+
+class StaffViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = Staff.objects.all()
+    serializer_class = StaffSerializer
