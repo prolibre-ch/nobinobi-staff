@@ -6,6 +6,7 @@ from django.core.exceptions import ValidationError, NON_FIELD_ERRORS
 from django.forms import BaseInlineFormSet
 from django.utils.translation import gettext as _
 from nobinobi_core.functions import AdminInlineWithSelectRelated
+from rangefilter.filter import DateRangeFilter
 
 from nobinobi_staff.forms import AbsenceAdminForm
 from .models import Absence, Qualification, Team, Staff, AbsenceType, AbsenceAttachment
@@ -136,10 +137,11 @@ class AbsenceAdmin(admin.ModelAdmin):
     form = AbsenceAdminForm
     suit_form_tabs = (('info', _('Absence informations')), ('file', _('Files')),)
     inlines = (AbsenceAttachmentInline,)
-    list_filter = ('abs_type', 'start_date', 'end_date')
+    list_filter = ('abs_type', ('start_date', DateRangeFilter), ('end_date', DateRangeFilter))
     list_display = ('staff', 'abs_type', 'start_date', 'end_date')
     ordering = ('-start_date',)
     search_fields = ('staff__last_name', 'staff__first_name')
+    save_as = True
     fieldsets = [
         (_('Information'),
          {
@@ -157,6 +159,7 @@ class AbsenceAdmin(admin.ModelAdmin):
              'fields': ['comment'],
          }),
     ]
+
 
 @admin.register(AbsenceType)
 class AbsenceTypeAdmin(admin.ModelAdmin):

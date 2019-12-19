@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'rest_framework_datatables',
+    'rangefilter',
     'nobinobi_core',
     'nobinobi_staff',
 
