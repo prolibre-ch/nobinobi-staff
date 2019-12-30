@@ -1,6 +1,8 @@
 import arrow
-from django.forms import ModelForm
-
+from datetimerange import DateTimeRange
+from django.forms import ModelForm, forms
+from django.utils import timezone
+from django.utils.translation import gettext as _
 from nobinobi_staff.models import Absence
 
 
@@ -13,25 +15,27 @@ class AbsenceAdminForm(ModelForm):
 
         """Constructor for AbsenceAdminForm"""
 
-    # def clean(self):
-    #     cleaned_data = super().clean()
-    #     all_day = cleaned_data['all_day']
-    #     start_date = self.data.get("start_date_0")
-    #     start_date_time = self.data.get("start_date_time_1")
-    #     end_date = self.data.get("end_date_0")
-    #     end_date_time = self.data.get("end_date_1")
-    #     now = arrow.now()
-    #     if not start_date:
-    #         start_date = now.date()
-    #     if not start_date_time:
-    #         if all_day:
-    #             self.data.get("start_date_time_1") = now.replace(hour=6, minute=0)
-    #     if not end_date:
-    #         end_date = now.date()
-    #     if not end_date_time:
-    #         end_date_time = now.time()
-    #
-    #     return cleaned_data
+    def clean(self):
+        cleaned_data = super().clean()
+        # get value
+        staff = cleaned_data.get('staff')
+        start_date = cleaned_data.get("start_date")
+        end_date = cleaned_data.get("end_date")
+        # create a range from form
+        form_absence_range = DateTimeRange(start_date, end_date)
+        # get absences
+        absences = Absence.objects.filter(
+            start_date__lte=end_date,
+            end_date__gte=start_date,
+            staff_id=staff.id
+        )
+        for absence in absences:
+            # create a range absence
+            absence_range = DateTimeRange(absence.start_date, absence.end_date)
+            # if form range is intersection with absence range raise error
+            if form_absence_range.is_intersection(absence_range):
+                raise forms.ValidationError(_('An absence already exists on these dates.'), code='invalid')
+        return cleaned_data
 
     def __init__(self, *args, **kwargs):
         try:
