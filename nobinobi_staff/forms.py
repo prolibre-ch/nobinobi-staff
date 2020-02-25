@@ -1,12 +1,14 @@
 import arrow
+from bootstrap_datepicker_plus import DatePickerInput
 from datetimerange import DateTimeRange
-from django.forms import ModelForm, forms
+from django import forms
+from django.contrib.admin.widgets import AdminDateWidget
 from django.utils import timezone
 from django.utils.translation import gettext as _
-from nobinobi_staff.models import Absence
+from nobinobi_staff.models import Absence, RightTraining
 
 
-class AbsenceAdminForm(ModelForm):
+class AbsenceAdminForm(forms.ModelForm):
     """ Formulaire pour le admin absence"""
 
     class Meta:
@@ -53,3 +55,26 @@ class AbsenceAdminForm(ModelForm):
         else:
             pass
         super(AbsenceAdminForm, self).__init__(*args, **kwargs)
+
+
+class RightTrainingAdminForm(forms.ModelForm):
+    date = forms.DateField(
+        label=_("Start date"),
+        widget=AdminDateWidget(),
+        # widget=DatePickerInput(options={
+        #     "locale": "fr",
+        #     "format": "DD/MM/YYYY"
+        # }),
+    )
+
+    class Meta:
+        model = RightTraining
+        fields = ("number_days", "date", "start_month", "start_day")
+
+    def save(self, commit=True):
+        form = self.instance
+        form.start_month = self.cleaned_data.get("date").month
+        form.start_day = self.cleaned_data.get("date").day
+        form.save()
+
+        return super(RightTrainingAdminForm, self).save(commit)

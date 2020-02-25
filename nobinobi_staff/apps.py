@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 from django.conf import settings
-from django.db.models.signals import post_migrate
+from django.db.models.signals import post_migrate, post_save
 from django.utils.translation import gettext_lazy as _
 
 
@@ -33,5 +33,6 @@ class NobinobiStaffConfig(AppConfig, object):
     verbose_name_plural = _("Staffes")
 
     def ready(self):
+        import nobinobi_staff.signals
         post_migrate.connect(load_fixtures_personal, sender=self)
         # post_migrate.connect(load_group_and_permissions, sender=self)
