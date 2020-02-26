@@ -4,6 +4,7 @@ import os
 import uuid
 
 import arrow
+from datetimerange import DateTimeRange
 from django.contrib.auth.models import User
 from django.db import models
 from django.db.models.functions import Upper
@@ -151,7 +152,7 @@ class Absence(models.Model):
             arrow.get(self.end_date).format("DD-MM-YYYY"))
 
     def _get_range_absence(self):
-        return [r for r in arrow.Arrow.span_range('day', arrow.get(self.start_date), arrow.get(self.end_date))]
+        return DateTimeRange(self.start_date, self.end_date)
 
     range_absence = property(_get_range_absence)
 
@@ -284,19 +285,22 @@ class Training(TimeStampedModel):
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
         # get config from RightTraining
-        rt = RightTraining.objects.first()
-        if rt:
-            # Set current academic year.
-            start_date = None
-            end_date = None
-            # +1 for accept 12 in range
-            if rt.start_month in range(9, 12 + 1):
-                start_date = arrow.get(make_aware(datetime.date(timezone.localdate().year, rt.start_month, rt.start_day)))
-                end_date = start_date.shift(years=1, days=-1)
-            else:
-                start_date = arrow.get(make_aware(datetime.datetime(timezone.localdate().year - 1, rt.start_month, rt.start_day)))
-                end_date = start_date.shift(years=1, days=-1)
+        if not self.pk:
+            rt = RightTraining.objects.first()
+            if rt:
+                # Set current academic year.
+                start_date = None
+                end_date = None
+                # +1 for accept 12 in range
+                if rt.start_month in range(9, 12 + 1):
+                    start_date = arrow.get(
+                        make_aware(datetime.date(timezone.localdate().year, rt.start_month, rt.start_day)))
+                    end_date = start_date.shift(years=1, days=-1)
+                else:
+                    start_date = arrow.get(
+                        make_aware(datetime.datetime(timezone.localdate().year - 1, rt.start_month, rt.start_day)))
+                    end_date = start_date.shift(years=1, days=-1)
 
-            self.start_date = start_date.date()
-            self.end_date = end_date.date()
-            return super(Training, self).save()
+                self.start_date = start_date.date()
+                self.end_date = end_date.date()
+        return super(Training, self).save()
