@@ -1,11 +1,11 @@
-from datetime import datetime
+import datetime
 
 import arrow
 from datetimerange import DateTimeRange
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.utils import timezone
-from django.utils.timezone import make_aware
+from django.utils.timezone import make_aware, make_naive
 
 from nobinobi_staff.models import Staff, Training, RightTraining, Absence
 
@@ -30,24 +30,14 @@ def update_training_for_staff(sender, instance, created, raw, using, **kwargs):
 
 @receiver(post_save, sender=Absence)
 def update_training_for_staff_after_absence(sender, instance, created, raw, using, **kwargs):
-    trs = None
-    try:
-        trs = list(Training.objects.get(
-            start_date__lte=instance.end_date,
-            end_date__gte=instance.start_date,
-            staff_id=instance.staff_id
-        ))
-    except Training.DoesNotExist:
-        pass
-    except Training.MultipleObjectsReturned:
-        trs = Training.objects.filter(
-            start_date__lte=instance.end_date,
-            end_date__gte=instance.start_date,
-            staff_id=instance.staff_id
-        )
+    trs = Training.objects.filter(
+        staff_id=instance.staff_id
+    )
 
     absences_list = []
     for tr in trs:
+        tr_startdatetime = make_aware(datetime.datetime.combine(tr.start_date, datetime.time(0, 0, 0, 0)))
+        tr_enddatetime = make_aware(datetime.datetime.combine(tr.end_date, datetime.time(23, 59, 59, 999999)))
         absences = Absence.objects.filter(
             staff_id=instance.staff.id,
             start_date__lte=tr.end_date,
@@ -56,15 +46,19 @@ def update_training_for_staff_after_absence(sender, instance, created, raw, usin
 
         total_form = 0.0
         for abs in absences:
-            datetime_absence_range = DateTimeRange(abs.start_date, abs.end_date)
+            start_date = make_naive(abs.start_date)
+            end_date = make_naive(abs.end_date)
+            datetime_absence_range = DateTimeRange(make_aware(start_date), make_aware(end_date))
             for value in datetime_absence_range.range(datetime.timedelta(days=1)):
-                for day in value:
+                if tr_startdatetime <= value <= tr_enddatetime:
                     if abs.all_day:
                         total_form += 1
                     else:
                         total_form += 0.5
 
             print(total_form)
+        tr.number_days = total_form
+        tr.save()
     # start_date = instance.start_
     # end_date = None
     # +1 for accept 12 in range
