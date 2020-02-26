@@ -294,11 +294,11 @@ class Training(TimeStampedModel):
                 # +1 for accept 12 in range
                 if rt.start_month in range(9, 12 + 1):
                     start_date = arrow.get(
-                        make_aware(datetime.date(timezone.localdate().year, rt.start_month, rt.start_day)))
+                        datetime.date(timezone.localdate().year, rt.start_month, rt.start_day))
                     end_date = start_date.shift(years=1, days=-1)
                 else:
                     start_date = arrow.get(
-                        make_aware(datetime.datetime(timezone.localdate().year - 1, rt.start_month, rt.start_day)))
+                        datetime.datetime(timezone.localdate().year - 1, rt.start_month, rt.start_day))
                     end_date = start_date.shift(years=1, days=-1)
 
                 self.start_date = start_date.date()
