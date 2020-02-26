@@ -281,26 +281,3 @@ class Training(TimeStampedModel):
 
     def __str__(self):
         return "{} - {} - {}".format(self.staff.full_name, self.default_number_days, self.number_days)
-
-    def save(self, force_insert=False, force_update=False, using=None,
-             update_fields=None):
-        # get config from RightTraining
-        if not self.pk:
-            rt = RightTraining.objects.first()
-            if rt:
-                # Set current academic year.
-                start_date = None
-                end_date = None
-                # +1 for accept 12 in range
-                if rt.start_month in range(9, 12 + 1):
-                    start_date = arrow.get(
-                        datetime.date(timezone.localdate().year, rt.start_month, rt.start_day))
-                    end_date = start_date.shift(years=1, days=-1)
-                else:
-                    start_date = arrow.get(
-                        datetime.datetime(timezone.localdate().year - 1, rt.start_month, rt.start_day))
-                    end_date = start_date.shift(years=1, days=-1)
-
-                self.start_date = start_date.date()
-                self.end_date = end_date.date()
-        return super(Training, self).save()

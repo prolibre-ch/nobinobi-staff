@@ -14,18 +14,30 @@ from nobinobi_staff.models import Staff, Training, RightTraining, Absence
 def update_training_for_staff(sender, instance, created, raw, using, **kwargs):
     now = timezone.localdate()
     rt = RightTraining.objects.first()
+    # +1 for accept 12 in range
+    if rt.start_month in range(9, 12 + 1):
+        if now.month in range(9, 13):
+            start_date = arrow.get(datetime.date(timezone.localdate().year, rt.start_month, rt.start_day))
+        else:
+            start_date = arrow.get(datetime.date(timezone.localdate().year - 1, rt.start_month, rt.start_day))
+        end_date = start_date.shift(years=1, days=-1)
+    else:
+        if now.month in range(9, 13):
+            start_date = arrow.get(datetime.datetime(timezone.localdate().year, rt.start_month, rt.start_day))
+        else:
+            start_date = arrow.get(datetime.datetime(timezone.localdate().year - 1, rt.start_month, rt.start_day))
+        end_date = start_date.shift(years=1, days=-1)
     if rt:
         training, created = Training.objects.get_or_create(
             staff=instance,
-            start_date__lte=now,
-            end_date__gte=now,
+            start_date=start_date.date(),
+            end_date=end_date.date(),
         )
         if created:
             ta = instance.percentage_work
-            rt = RightTraining.objects.first()
 
-            training.default_number_days = (rt.number_days * ta) / 100
-            training.save()
+        training.default_number_days = (rt.number_days * ta) / 100
+        training.save()
 
 
 @receiver(post_save, sender=Absence)
