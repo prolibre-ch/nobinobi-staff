@@ -48,4 +48,8 @@ class Migration(migrations.Migration):
             name='staff',
             field=models.ForeignKey(editable=False, on_delete=django.db.models.deletion.CASCADE, to='nobinobi_staff.Staff', verbose_name='Staff'),
         ),
+        migrations.AlterUniqueTogether(
+            name='training',
+            unique_together={('start_date', 'end_date', 'staff')},
+        ),
     ]

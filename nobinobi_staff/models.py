@@ -277,6 +277,7 @@ class Training(TimeStampedModel):
     class Meta:
         ordering = ('start_date', 'end_date',)
         verbose_name = _('Training')
+        unique_together = ('start_date', 'end_date', 'staff')
         # verbose_name_plural = _('')
 
     def __str__(self):
