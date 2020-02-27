@@ -2,7 +2,7 @@ import datetime
 
 import arrow
 from datetimerange import DateTimeRange
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 from django.utils import timezone
 from django.utils.timezone import make_aware, make_naive
@@ -40,8 +40,8 @@ def update_training_for_staff(sender, instance, created, raw, using, **kwargs):
         training.save()
 
 
-@receiver(post_save, sender=Absence)
-def update_training_for_staff_after_absence(sender, instance, created, raw, using, **kwargs):
+@receiver((post_save, post_delete), sender=Absence)
+def update_training_for_staff_after_absence(sender, instance, **kwargs):
     # absence
     absence = instance
 
