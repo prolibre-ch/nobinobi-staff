@@ -36,5 +36,6 @@ class Command(BaseCommand):
                 logging.info(_("Staff training courses are created for the year {}.".format(str(year))))
                 self.stdout.write(_("Staff training courses are created for the year {}.".format(str(year))))
         else:
-            raise ObjectDoesNotExist()
+            logging.info(_("There's no right to information training."))
+            self.stdout.write(_("There's no right to information training."))
 

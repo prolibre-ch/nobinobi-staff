@@ -1,6 +1,7 @@
 import datetime
 
 import arrow
+import pytz
 from datetimerange import DateTimeRange
 from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
@@ -54,6 +55,7 @@ def update_training_for_staff_after_absence(sender, instance, **kwargs):
     trs = Training.objects.filter(
         staff_id=instance.staff_id
     )
+    utc_tz = pytz.timezone("UTC")
     if trs:
         absence_in_tr = Absence.objects.filter(
             staff_id=instance.staff_id,
@@ -64,8 +66,8 @@ def update_training_for_staff_after_absence(sender, instance, **kwargs):
             total_form = 0.0
 
             # on cree le range du tr
-            tr_start_datetime = make_aware(datetime.datetime.combine(tr.start_date, datetime.time(0, 0, 0, 0)))
-            tr_end_datetime = make_aware(datetime.datetime.combine(tr.end_date, datetime.time(23, 59, 59, 999999)))
+            tr_start_datetime = utc_tz.localize(datetime.datetime.combine(tr.start_date, datetime.time(0, 0, 0, 0)))
+            tr_end_datetime = utc_tz.localize(datetime.datetime.combine(tr.end_date, datetime.time(23, 59, 59, 999999)))
             tr_range = DateTimeRange(tr_start_datetime, tr_end_datetime)
             # si l'absence est en interaction avec le tr
             if absence_range.is_intersection(tr_range):
