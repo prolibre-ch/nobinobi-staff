@@ -49,7 +49,7 @@ def update_training_for_staff_after_absence(sender, instance, **kwargs):
     # on cree le range de cette absence
     # abs_start_date = absence.start_date
     # abs_end_date = absence.end_date
-    absence_range = absence._get_range_absence()
+    absence_range = absence.range_absence
 
     # on récupère que training est concerné par cette absence
     trs = Training.objects.filter(
@@ -72,7 +72,7 @@ def update_training_for_staff_after_absence(sender, instance, **kwargs):
             # si l'absence est en interaction avec le tr
             if absence_range.is_intersection(tr_range):
                 for abs in absence_in_tr:
-                    abs_range = abs._get_range_absence()
+                    abs_range = abs.range_absence
                     if abs_range.is_intersection(tr_range):
                         for value in abs_range.range(datetime.timedelta(days=1)):
                             if tr_start_datetime <= value <= tr_end_datetime:
