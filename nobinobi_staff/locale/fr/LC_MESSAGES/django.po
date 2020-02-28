@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-30 13:18+0100\n"
-"PO-Revision-Date: 2018-10-22 11:02+0200\n"
+"POT-Creation-Date: 2020-02-28 09:14+0100\n"
+"PO-Revision-Date: 2020-02-28 09:17+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -16,235 +16,308 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 2.1.1\n"
+"X-Generator: Poedit 2.3\n"
 
-#: .\admin.py:25
+#: .\admin.py:29
 msgid "The start date is greater than the end date."
 msgstr "La date de début est supérieure à la date de fin."
 
-#: .\admin.py:60 .\admin.py:70
+#: .\admin.py:64 .\admin.py:74
 msgid "Staff informations"
 msgstr "Informations personnel"
 
-#: .\admin.py:60
+#: .\admin.py:64
 msgid "Absences"
 msgstr "Absences"
 
-#: .\admin.py:77 .\models.py:52
+#: .\admin.py:81 .\models.py:57
 msgid "Qualification"
 msgstr "Qualification"
 
-#: .\admin.py:82 .\admin.py:149
+#: .\admin.py:86 .\admin.py:154
 msgid "Date"
 msgstr "Date"
 
-#: .\admin.py:86
+#: .\admin.py:90
 msgid "Planning"
 msgstr "Horaire"
 
-#: .\admin.py:88
+#: .\admin.py:92
 msgid "Occupancy rate (based on a 40-hour weekly schedule)"
 msgstr "Taux d'occupation (selon un horaire hebdomadaire de 40 heures)"
 
-#: .\admin.py:137
+#: .\admin.py:141
 msgid "Absence informations"
 msgstr "Informations sur l'absence"
 
-#: .\admin.py:137
+#: .\admin.py:141
 msgid "Files"
 msgstr "Fichiers"
 
-#: .\admin.py:144
-#, fuzzy
-#| msgid "Staff informations"
+#: .\admin.py:149
 msgid "Information"
-msgstr "Informations personnel"
+msgstr "Information"
 
-#: .\admin.py:154 .\models.py:144
+#: .\admin.py:159 .\models.py:147
 msgid "Comment"
 msgstr "Commentaire"
 
-#: .\apps.py:32 .\models.py:111 .\models.py:130
+#: .\apps.py:32 .\models.py:114 .\models.py:133 .\models.py:273
 msgid "Staff"
 msgstr "Personnel"
 
-#: .\apps.py:33 .\models.py:110
+#: .\apps.py:33 .\models.py:113
 msgid "Staffes"
 msgstr "Personnels"
 
-#: .\forms.py:37
+#: .\forms.py:39
 msgid "An absence already exists on these dates."
 msgstr "Une absence existe déjà dans ces dates."
 
-#: .\models.py:15
-msgid "Man"
-msgstr "Homme"
-
-#: .\models.py:16
-msgid "Woman"
-msgstr "Femme"
-
-#: .\models.py:17
-msgid "Other"
-msgstr "Autre"
-
-#: .\models.py:27
-msgid "user"
-msgstr "utilisateur"
-
-#: .\models.py:31 .\templates\staff\staff_list_readonly.html:29
-msgid "Last name"
-msgstr "Nom de famille"
-
-#: .\models.py:32 .\templates\staff\staff_list_readonly.html:28
-msgid "First name"
-msgstr "Prénom"
-
-#: .\models.py:33
-msgid "Gender"
-msgstr "Sexe"
-
-#: .\models.py:34
-msgid "Birth Date"
-msgstr "Date de naissance"
-
-#: .\models.py:35
-msgid "Street"
-msgstr "Rue"
-
-#: .\models.py:36
-msgid "ZIP"
-msgstr "Nip"
-
-#: .\models.py:37
-msgid "City"
-msgstr "Ville"
-
-#: .\models.py:38 .\templates\staff\staff_list_readonly.html:30
-msgid "Phone"
-msgstr "Téléphone"
-
-#: .\models.py:39 .\templates\staff\staff_list_readonly.html:31
-msgid "Mobile phone"
-msgstr "Téléphone portable"
-
-#: .\models.py:40
-msgid "AVS"
-msgstr "AVS"
-
-#: .\models.py:41 .\templates\staff\staff_list_readonly.html:32
-msgid "Email"
-msgstr "Courriel"
-
-#: .\models.py:44 .\models.py:222
-msgid "Team"
-msgstr ""
-
-#: .\models.py:57
-msgid "Percentage of work"
-msgstr "Pourcentage de travail"
-
-#: .\models.py:58
-msgid "Working time"
-msgstr "Temps de travail"
-
-#: .\models.py:59
-#, fuzzy
-#| msgid "Working time"
-msgid "Working base"
-msgstr "Temps de travail"
-
-#: .\models.py:65
-msgid "Active"
-msgstr "Actif"
-
-#: .\models.py:66
-msgid "Arrival date"
-msgstr "Date d’arrivée"
-
-#: .\models.py:67
-msgid "Departure Date"
-msgstr "Date de départ"
-
-#: .\models.py:116 .\models.py:217
-msgid "Name"
-msgstr "Nom"
-
-#: .\models.py:117
-msgid "Short name"
-msgstr "Nom abrégé"
-
-#: .\models.py:118 .\models.py:219
-msgid "Order"
-msgstr "Ordre"
-
-#: .\models.py:136 .\models.py:202
-msgid "Absence type"
-msgstr "Type d'absence"
-
-#: .\models.py:141
+#: .\forms.py:62 .\models.py:144 .\models.py:268
 msgid "Start date"
 msgstr "Date de début"
 
-#: .\models.py:142
+#: .\management\commands\generate_training_for_all_staff.py:13
+msgid "Command for generate training for all staff."
+msgstr "Commande pour générer la formation pour tout le personnel."
+
+#: .\management\commands\generate_training_for_all_staff.py:36
+#: .\management\commands\generate_training_for_all_staff.py:37
+msgid "Staff training courses are created for the year {}."
+msgstr "Les droit à la formation du personnel sont créés pour l’année {}."
+
+#: .\models.py:20
+msgid "Man"
+msgstr "Homme"
+
+#: .\models.py:21
+msgid "Woman"
+msgstr "Femme"
+
+#: .\models.py:22
+msgid "Other"
+msgstr "Autre"
+
+#: .\models.py:32
+msgid "user"
+msgstr "utilisateur"
+
+#: .\models.py:36 .\templates\staff\staff_list_readonly.html:29
+msgid "Last name"
+msgstr "Nom de famille"
+
+#: .\models.py:37 .\templates\staff\staff_list_readonly.html:28
+msgid "First name"
+msgstr "Prénom"
+
+#: .\models.py:38
+msgid "Gender"
+msgstr "Sexe"
+
+#: .\models.py:39
+msgid "Birth Date"
+msgstr "Date de naissance"
+
+#: .\models.py:40
+msgid "Street"
+msgstr "Rue"
+
+#: .\models.py:41
+msgid "ZIP"
+msgstr "Nip"
+
+#: .\models.py:42
+msgid "City"
+msgstr "Ville"
+
+#: .\models.py:43 .\templates\staff\staff_list_readonly.html:30
+msgid "Phone"
+msgstr "Téléphone"
+
+#: .\models.py:44 .\templates\staff\staff_list_readonly.html:31
+msgid "Mobile phone"
+msgstr "Téléphone portable"
+
+#: .\models.py:45
+msgid "AVS"
+msgstr "AVS"
+
+#: .\models.py:46 .\templates\staff\staff_list_readonly.html:32
+msgid "Email"
+msgstr "Courriel"
+
+#: .\models.py:49 .\models.py:185
+msgid "Team"
+msgstr "Équipe"
+
+#: .\models.py:62
+msgid "Percentage of work"
+msgstr "Pourcentage de travail"
+
+#: .\models.py:63
+msgid "Working time"
+msgstr "Temps de travail"
+
+#: .\models.py:64
+msgid "Working base"
+msgstr "Base de travail"
+
+#: .\models.py:68
+msgid "Active"
+msgstr "Actif"
+
+#: .\models.py:69
+msgid "Arrival date"
+msgstr "Date d’arrivée"
+
+#: .\models.py:70
+msgid "Departure Date"
+msgstr "Date de départ"
+
+#: .\models.py:119 .\models.py:180
+msgid "Name"
+msgstr "Nom"
+
+#: .\models.py:120
+msgid "Short name"
+msgstr "Nom abrégé"
+
+#: .\models.py:121 .\models.py:182
+msgid "Order"
+msgstr "Ordre"
+
+#: .\models.py:139 .\models.py:165
+msgid "Absence type"
+msgstr "Type d'absence"
+
+#: .\models.py:145 .\models.py:269
 msgid "End date"
 msgstr "Date de fin"
 
-#: .\models.py:143
+#: .\models.py:146
 msgid "All day"
 msgstr "Toute la journée"
 
-#: .\models.py:198
+#: .\models.py:161
 msgid "Reason"
 msgstr "Raison"
 
-#: .\models.py:199
+#: .\models.py:162
 msgid "Abbreviation"
-msgstr ""
+msgstr "Abréviation"
 
-#: .\models.py:203
+#: .\models.py:166
 msgid "Absences type"
 msgstr "Types d'absences"
 
-#: .\models.py:218
+#: .\models.py:181
 msgid "Slug"
 msgstr "Slug"
 
-#: .\models.py:223
+#: .\models.py:186
 msgid "Teams"
-msgstr ""
+msgstr "Équipes"
 
-#: .\models.py:245
+#: .\models.py:208
 msgid "Medical certificate"
 msgstr "Certificat médical"
 
-#: .\models.py:246
+#: .\models.py:209
 msgid "Work Certificate"
 msgstr "Certificat de travail"
 
-#: .\models.py:254
+#: .\models.py:217
 msgid "Type"
 msgstr "Type"
 
-#: .\models.py:255
+#: .\models.py:218
 msgid "File"
 msgstr "Fichier"
 
-#: .\models.py:257
+#: .\models.py:220
 msgid "Absence"
 msgstr "Absence"
 
-#: .\models.py:263
-#, fuzzy
-#| msgid "Absence type"
+#: .\models.py:226
 msgid "Absence attachment"
-msgstr "Type d'absence"
+msgstr "Pièce jointe d’absence"
 
-#: .\models.py:264
-#, fuzzy
-#| msgid "Absence type"
+#: .\models.py:227
 msgid "Absence attachments"
-msgstr "Type d'absence"
+msgstr "Pièces jointes d’absence"
+
+#: .\models.py:236
+msgid "January"
+msgstr "Janvier"
+
+#: .\models.py:237
+msgid "February"
+msgstr "Février"
+
+#: .\models.py:238
+msgid "Mars"
+msgstr "Mars"
+
+#: .\models.py:239
+msgid "April"
+msgstr "Avril"
+
+#: .\models.py:240
+msgid "May"
+msgstr "Mai"
+
+#: .\models.py:241
+msgid "June"
+msgstr "Juin"
+
+#: .\models.py:242
+msgid "July"
+msgstr "Juillet"
+
+#: .\models.py:243
+msgid "August"
+msgstr "Août"
+
+#: .\models.py:244
+msgid "September"
+msgstr "Septembre"
+
+#: .\models.py:245
+msgid "October"
+msgstr "Octobre"
+
+#: .\models.py:246
+msgid "November"
+msgstr "Novembre"
+
+#: .\models.py:247
+msgid "December"
+msgstr "Décembre"
+
+#: .\models.py:250 .\models.py:266 .\models.py:267
+msgid "Number of days"
+msgstr "Nombre de jours"
+
+#: .\models.py:251
+msgid "Number of days of training entitlement based on a 100% activity rate."
+msgstr "Nombre de jours de formation en fonction d’un taux d’activité de 100 %."
+
+#: .\models.py:252
+msgid "Start day"
+msgstr "Date de début"
+
+#: .\models.py:253
+msgid "Start month"
+msgstr "Mois de début"
+
+#: .\models.py:257
+msgid "Right to training"
+msgstr "Droit à la formation"
+
+#: .\models.py:279
+msgid "Training"
+msgstr "Formation"
 
 #: .\templates\staff\staff_list_readonly.html:17 .\views.py:20
 msgid "Staffes list"
