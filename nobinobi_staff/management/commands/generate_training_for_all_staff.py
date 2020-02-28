@@ -13,10 +13,10 @@ class Command(BaseCommand):
     help = _("Command for generate training for all staff.")
 
     def add_arguments(self, parser):
-        parser.add_argument('year', nargs='+')
+        parser.add_argument('--year', nargs='+')
 
     def handle(self, *args, **options):
-        years = options.get("year")[1:]
+        years = options.get("year")
         rt = RightTraining.objects.first()
         if rt:
             for year in years:
