@@ -145,7 +145,7 @@ class Absence(models.Model):
     end_date = models.DateTimeField(_("End date"))
     all_day = models.BooleanField(_("All day"), default=False)
     comment = models.TextField(_("Comment"), blank=True, null=True)
-    incapacity_of_work = models.IntegerField(_("Incapacity of work"), blank=True, null=True, help_text=_("In percentage %"))
+    partial_disability = models.IntegerField(_("Partial disability"), blank=True, null=True, help_text=_("In percentage %"))
 
     def __str__(self):  # __unicode__ on Python 2
         return '%s | %s | %s - %s' % (

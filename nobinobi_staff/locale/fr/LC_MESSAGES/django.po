@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-05 15:06+0100\n"
-"PO-Revision-Date: 2020-03-05 15:06+0100\n"
+"POT-Creation-Date: 2020-03-05 15:36+0100\n"
+"PO-Revision-Date: 2020-03-05 15:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -82,9 +82,25 @@ msgstr "Date de début"
 msgid "Command for generate training for all staff."
 msgstr "Commande pour générer la formation pour tout le personnel."
 
-#: .\management\commands\generate_training_for_all_staff.py:36
 #: .\management\commands\generate_training_for_all_staff.py:37
+#: .\management\commands\generate_training_for_all_staff.py:38
 msgid "Staff training courses are created for the year {}."
+msgstr "Les droit à la formation du personnel sont créés pour l’année {}."
+
+#: .\management\commands\generate_training_for_all_staff.py:40
+#: .\management\commands\generate_training_for_all_staff.py:41
+#: .\management\commands\update_training_for_all_staff.py:76
+#: .\management\commands\update_training_for_all_staff.py:77
+msgid "There's no right to information training."
+msgstr ""
+
+#: .\management\commands\update_training_for_all_staff.py:17
+msgid "Command for update training for all staff."
+msgstr "Commande pour générer la formation pour tout le personnel."
+
+#: .\management\commands\update_training_for_all_staff.py:73
+#: .\management\commands\update_training_for_all_staff.py:74
+msgid "Staff training courses are updated for the year {}."
 msgstr "Les droit à la formation du personnel sont créés pour l’année {}."
 
 #: .\models.py:20
@@ -200,8 +216,8 @@ msgid "All day"
 msgstr "Toute la journée"
 
 #: .\models.py:148
-msgid "Incapacity of work"
-msgstr "Incapacité de travail"
+msgid "Partial disability"
+msgstr "Invalidité partielle"
 
 #: .\models.py:148
 msgid "In percentage %"
@@ -330,6 +346,9 @@ msgstr "Formation"
 #: .\templates\staff\staff_list_readonly.html:17 .\views.py:20
 msgid "Staffes list"
 msgstr "Liste du personnels"
+
+#~ msgid "Incapacity of work"
+#~ msgstr "Incapacité de travail"
 
 #~ msgid "Preparation time"
 #~ msgstr "Temps de préparation"
