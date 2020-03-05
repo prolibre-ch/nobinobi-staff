@@ -154,7 +154,7 @@ class AbsenceAdmin(admin.ModelAdmin):
         (_('Date'),
          {
              'classes': ('suit-tab', 'suit-tab-info',),
-             'fields': ['start_date', 'end_date', 'all_day'],
+             'fields': ['start_date', 'end_date', 'all_day', 'partial_disability'],
          }),
         (_('Comment'),
          {
