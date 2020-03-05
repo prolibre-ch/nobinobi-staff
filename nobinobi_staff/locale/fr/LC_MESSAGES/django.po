@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-28 09:14+0100\n"
-"PO-Revision-Date: 2020-02-28 09:17+0100\n"
+"POT-Creation-Date: 2020-03-05 15:06+0100\n"
+"PO-Revision-Date: 2020-03-05 15:06+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -62,7 +62,7 @@ msgstr "Information"
 msgid "Comment"
 msgstr "Commentaire"
 
-#: .\apps.py:32 .\models.py:114 .\models.py:133 .\models.py:273
+#: .\apps.py:32 .\models.py:114 .\models.py:133 .\models.py:274
 msgid "Staff"
 msgstr "Personnel"
 
@@ -74,7 +74,7 @@ msgstr "Personnels"
 msgid "An absence already exists on these dates."
 msgstr "Une absence existe déjà dans ces dates."
 
-#: .\forms.py:62 .\models.py:144 .\models.py:268
+#: .\forms.py:62 .\models.py:144 .\models.py:269
 msgid "Start date"
 msgstr "Date de début"
 
@@ -147,7 +147,7 @@ msgstr "AVS"
 msgid "Email"
 msgstr "Courriel"
 
-#: .\models.py:49 .\models.py:185
+#: .\models.py:49 .\models.py:186
 msgid "Team"
 msgstr "Équipe"
 
@@ -175,7 +175,7 @@ msgstr "Date d’arrivée"
 msgid "Departure Date"
 msgstr "Date de départ"
 
-#: .\models.py:119 .\models.py:180
+#: .\models.py:119 .\models.py:181
 msgid "Name"
 msgstr "Nom"
 
@@ -183,15 +183,15 @@ msgstr "Nom"
 msgid "Short name"
 msgstr "Nom abrégé"
 
-#: .\models.py:121 .\models.py:182
+#: .\models.py:121 .\models.py:183
 msgid "Order"
 msgstr "Ordre"
 
-#: .\models.py:139 .\models.py:165
+#: .\models.py:139 .\models.py:166
 msgid "Absence type"
 msgstr "Type d'absence"
 
-#: .\models.py:145 .\models.py:269
+#: .\models.py:145 .\models.py:270
 msgid "End date"
 msgstr "Date de fin"
 
@@ -199,123 +199,131 @@ msgstr "Date de fin"
 msgid "All day"
 msgstr "Toute la journée"
 
-#: .\models.py:161
+#: .\models.py:148
+msgid "Incapacity of work"
+msgstr "Incapacité de travail"
+
+#: .\models.py:148
+msgid "In percentage %"
+msgstr "En pourcentage %"
+
+#: .\models.py:162
 msgid "Reason"
 msgstr "Raison"
 
-#: .\models.py:162
+#: .\models.py:163
 msgid "Abbreviation"
 msgstr "Abréviation"
 
-#: .\models.py:166
+#: .\models.py:167
 msgid "Absences type"
 msgstr "Types d'absences"
 
-#: .\models.py:181
+#: .\models.py:182
 msgid "Slug"
 msgstr "Slug"
 
-#: .\models.py:186
+#: .\models.py:187
 msgid "Teams"
 msgstr "Équipes"
 
-#: .\models.py:208
+#: .\models.py:209
 msgid "Medical certificate"
 msgstr "Certificat médical"
 
-#: .\models.py:209
+#: .\models.py:210
 msgid "Work Certificate"
 msgstr "Certificat de travail"
 
-#: .\models.py:217
+#: .\models.py:218
 msgid "Type"
 msgstr "Type"
 
-#: .\models.py:218
+#: .\models.py:219
 msgid "File"
 msgstr "Fichier"
 
-#: .\models.py:220
+#: .\models.py:221
 msgid "Absence"
 msgstr "Absence"
 
-#: .\models.py:226
+#: .\models.py:227
 msgid "Absence attachment"
 msgstr "Pièce jointe d’absence"
 
-#: .\models.py:227
+#: .\models.py:228
 msgid "Absence attachments"
 msgstr "Pièces jointes d’absence"
 
-#: .\models.py:236
+#: .\models.py:237
 msgid "January"
 msgstr "Janvier"
 
-#: .\models.py:237
+#: .\models.py:238
 msgid "February"
 msgstr "Février"
 
-#: .\models.py:238
+#: .\models.py:239
 msgid "Mars"
 msgstr "Mars"
 
-#: .\models.py:239
+#: .\models.py:240
 msgid "April"
 msgstr "Avril"
 
-#: .\models.py:240
+#: .\models.py:241
 msgid "May"
 msgstr "Mai"
 
-#: .\models.py:241
+#: .\models.py:242
 msgid "June"
 msgstr "Juin"
 
-#: .\models.py:242
+#: .\models.py:243
 msgid "July"
 msgstr "Juillet"
 
-#: .\models.py:243
+#: .\models.py:244
 msgid "August"
 msgstr "Août"
 
-#: .\models.py:244
+#: .\models.py:245
 msgid "September"
 msgstr "Septembre"
 
-#: .\models.py:245
+#: .\models.py:246
 msgid "October"
 msgstr "Octobre"
 
-#: .\models.py:246
+#: .\models.py:247
 msgid "November"
 msgstr "Novembre"
 
-#: .\models.py:247
+#: .\models.py:248
 msgid "December"
 msgstr "Décembre"
 
-#: .\models.py:250 .\models.py:266 .\models.py:267
+#: .\models.py:251 .\models.py:267 .\models.py:268
 msgid "Number of days"
 msgstr "Nombre de jours"
 
-#: .\models.py:251
+#: .\models.py:252
 msgid "Number of days of training entitlement based on a 100% activity rate."
 msgstr "Nombre de jours de formation en fonction d’un taux d’activité de 100 %."
 
-#: .\models.py:252
+#: .\models.py:253
 msgid "Start day"
 msgstr "Date de début"
 
-#: .\models.py:253
+#: .\models.py:254
 msgid "Start month"
 msgstr "Mois de début"
 
-#: .\models.py:257
+#: .\models.py:258
 msgid "Right to training"
 msgstr "Droit à la formation"
 
-#: .\models.py:279
+#: .\models.py:280
 msgid "Training"
 msgstr "Formation"
 
