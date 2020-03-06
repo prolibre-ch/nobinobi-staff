@@ -217,7 +217,7 @@ msgstr "Toute la journée"
 
 #: .\models.py:148
 msgid "Partial disability"
-msgstr "Invalidité partielle"
+msgstr "Incapacité partielle"
 
 #: .\models.py:148
 msgid "In percentage %"
