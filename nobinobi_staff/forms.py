@@ -23,6 +23,9 @@ class AbsenceAdminForm(forms.ModelForm):
         staff = cleaned_data.get('staff')
         start_date = cleaned_data.get("start_date")
         end_date = cleaned_data.get("end_date")
+        # check if start_date is before end_date else raise error
+        if start_date > end_date:
+            raise forms.ValidationError(_('The start date must be before the end date.'), code='invalid')
         # create a range from form
         form_absence_range = DateTimeRange(start_date, end_date)
         # get absences

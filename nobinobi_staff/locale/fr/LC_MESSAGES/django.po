@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-05 15:36+0100\n"
-"PO-Revision-Date: 2020-03-05 15:36+0100\n"
+"POT-Creation-Date: 2020-03-09 14:09+0100\n"
+"PO-Revision-Date: 2020-03-09 14:09+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -70,11 +70,15 @@ msgstr "Personnel"
 msgid "Staffes"
 msgstr "Personnels"
 
-#: .\forms.py:39
+#: .\forms.py:28
+msgid "The start date must be before the end date."
+msgstr "La date de début doit être avant la date de fin."
+
+#: .\forms.py:42
 msgid "An absence already exists on these dates."
 msgstr "Une absence existe déjà dans ces dates."
 
-#: .\forms.py:62 .\models.py:144 .\models.py:269
+#: .\forms.py:65 .\models.py:144 .\models.py:269
 msgid "Start date"
 msgstr "Date de début"
 
@@ -92,7 +96,7 @@ msgstr "Les droit à la formation du personnel sont créés pour l’année {}."
 #: .\management\commands\update_training_for_all_staff.py:76
 #: .\management\commands\update_training_for_all_staff.py:77
 msgid "There's no right to information training."
-msgstr ""
+msgstr "Il n’y a pas d'information concernant le droit à la formation."
 
 #: .\management\commands\update_training_for_all_staff.py:17
 msgid "Command for update training for all staff."
