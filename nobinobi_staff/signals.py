@@ -36,9 +36,8 @@ def update_training_for_staff(sender, instance, created, raw, using, **kwargs):
         )
         if created:
             ta = instance.percentage_work
-
-        training.default_number_days = (rt.number_days * ta) / 100
-        training.save()
+            training.default_number_days = (rt.number_days * ta) / 100
+            training.save()
 
 
 @receiver((post_save, post_delete), sender=Absence)
