@@ -1,15 +1,20 @@
 # coding=utf-8
+import datetime
 import os
 import uuid
 
 import arrow
+from datetimerange import DateTimeRange
 from django.contrib.auth.models import User
 from django.db import models
 from django.db.models.functions import Upper
+from django.utils import timezone
 from django.utils.text import slugify
+from django.utils.timezone import make_aware
 from django.utils.translation import gettext as _
+from django_auto_one_to_one import AutoOneToOneModel
 from model_utils import Choices
-from model_utils.models import StatusField
+from model_utils.models import StatusField, TimeStampedModel
 
 GENDER_CHOICE = Choices(
     (0, "man", _('Man')),
@@ -60,8 +65,6 @@ class Staff(models.Model):
 
     # recorded_time = models.FloatField(_("Temps enregistré"), default=0)
     # temps_prep_enregistre = models.FloatField(_("Temps de préparation enregistré"), default=0)
-    # absence = models.BooleanField(_("Absence"), default=False)
-    # remplacant = models.BooleanField(verbose_name=_("Remplaçant"), default=False)
     active = models.BooleanField(verbose_name=_("Active"), default=True)
     arrival_date = models.DateField(_("Arrival date"), null=True)
     departure_date = models.DateField(_("Departure Date"), null=True, blank=True)
@@ -142,6 +145,7 @@ class Absence(models.Model):
     end_date = models.DateTimeField(_("End date"))
     all_day = models.BooleanField(_("All day"), default=False)
     comment = models.TextField(_("Comment"), blank=True, null=True)
+    partial_disability = models.IntegerField(_("Partial disability"), blank=True, null=True, help_text=_("In percentage %"))
 
     def __str__(self):  # __unicode__ on Python 2
         return '%s | %s | %s - %s' % (
@@ -149,54 +153,14 @@ class Absence(models.Model):
             arrow.get(self.end_date).format("DD-MM-YYYY"))
 
     def _get_range_absence(self):
-        return [r for r in arrow.Arrow.span_range('day', arrow.get(self.start_date), arrow.get(self.end_date))]
+        return DateTimeRange(self.start_date, self.end_date)
 
     range_absence = property(_get_range_absence)
-
-    def save(self, *args, **kwargs):
-        """What to do when we modify or create"""
-        super(Absence, self).save(*args, **kwargs)
-        # FIXME: a remettre
-
-        # if settings.ENABLE_POINTAGE:
-        #     today = arrow.utcnow().date()
-        #     if today > self.date_fin:
-        #         from nobinobi.pointage.models import update_all_statistics_on_day
-        #         for day in arrow.Arrow.range(
-        #             'day',
-        #             arrow.get(self.date_debut),
-        #             arrow.get(self.date_fin)
-        #         ):
-        #             update_all_statistics_on_day(
-        #                 day=day.datetime,
-        #                 staff=self.staff,
-        #             )
-        # return to_return
-
-    def delete(self, *args, **kwargs):
-        """Delete the model"""
-        super(Absence, self).delete(*args, **kwargs)
-        # FIXME: a remettre
-        # if settings.ENABLE_POINTAGE:
-        #
-        #     today = arrow.utcnow().date()
-        #     if today > self.date_fin:
-        #         from nobinobi.pointage.models import update_all_statistics_on_day
-        #         for day in arrow.Arrow.range(
-        #             'day',
-        #             arrow.get(self.date_debut),
-        #             arrow.get(self.date_fin)
-        #         ):
-        #             update_all_statistics_on_day(
-        #                 day=day.datetime,
-        #                 staff=self.staff,
-        #             )
-        # return to_return
 
 
 class AbsenceType(models.Model):
     reason = models.CharField(_("Reason"), max_length=255)
-    abbr = models.CharField(_("Abbreviation"), max_length=3,default="000")
+    abbr = models.CharField(_("Abbreviation"), max_length=3, default="000")
 
     class Meta:
         verbose_name = _("Absence type")
@@ -265,3 +229,57 @@ class AbsenceAttachment(models.Model):
 
     def __str__(self):
         return "".format(self.absence, self.file)
+
+
+class RightTraining(models.Model):
+    """Model to store variable for right to training"""
+    MONTH_CHOICES = Choices(
+        (1, _("January")),
+        (2, _("February")),
+        (3, _("Mars")),
+        (4, _("April")),
+        (5, _("May")),
+        (6, _("June")),
+        (7, _("July")),
+        (8, _("August")),
+        (9, _("September")),
+        (10, _("October")),
+        (11, _("November")),
+        (12, _("December")),
+    )
+
+    number_days = models.IntegerField(_("Number of days"), help_text=_(
+        "Number of days of training entitlement based on a 100% activity rate."))
+    start_day = models.IntegerField(_("Start day"), choices=((x, x) for x in range(0, 32, 1)))
+    start_month = models.IntegerField(_("Start month"), choices=MONTH_CHOICES)
+
+    class Meta:
+        # ordering = ('date',)
+        verbose_name = _('Right to training')
+        # verbose_name_plural = _('')
+
+    def __str__(self):
+        return str(self.number_days)
+
+
+class Training(TimeStampedModel):
+    """Models to store for a staff number exactly have"""
+    default_number_days = models.FloatField(_("Number of days"), default=0.0)
+    number_days = models.FloatField(_("Number of days"), default=0.0)
+    start_date = models.DateField(_("Start date"), editable=False)
+    end_date = models.DateField(_("End date"), editable=False)
+    staff = models.ForeignKey(
+        to=Staff,
+        on_delete=models.CASCADE,
+        verbose_name=_("Staff"),
+        editable=False
+    )
+
+    class Meta:
+        ordering = ('start_date', 'end_date',)
+        verbose_name = _('Training')
+        unique_together = ('start_date', 'end_date', 'staff')
+        # verbose_name_plural = _('')
+
+    def __str__(self):
+        return "{} - {} - {}".format(self.staff.full_name, self.default_number_days, self.number_days)

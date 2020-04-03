@@ -23,5 +23,5 @@ class ListStaffReadOnly(TemplateView, LoginRequiredMixin, object):
 
 
 class StaffViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = Staff.objects.all()
+    queryset = Staff.objects.filter(active=True)
     serializer_class = StaffSerializer

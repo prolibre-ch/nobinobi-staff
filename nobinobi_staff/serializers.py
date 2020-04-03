@@ -21,7 +21,5 @@ class StaffSerializer(serializers.ModelSerializer):
     class Meta:
         model = Staff
         fields = '__all__'
+        datatables_always_serialize = ("id", "first_name", "last_name", "phone", "mobile_phone", "email")
 
-    def to_representation(self, instance):
-        representation = super(StaffSerializer, self).to_representation(instance)
-        return representation

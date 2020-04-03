@@ -1,14 +1,18 @@
 # coding=utf-8
 import arrow
 from django.contrib import admin
-from django.contrib.admin import StackedInline
-from django.core.exceptions import ValidationError, NON_FIELD_ERRORS
-from django.forms import BaseInlineFormSet
+from django.contrib.admin import StackedInline, helpers
+from django.contrib.admin.exceptions import DisallowedModelAdminToField
+from django.contrib.admin.options import TO_FIELD_VAR, IS_POPUP_VAR
+from django.contrib.admin.utils import unquote
+from django.core.exceptions import ValidationError, NON_FIELD_ERRORS, PermissionDenied
+from django.forms import BaseInlineFormSet, all_valid
 from django.utils.translation import gettext as _
 from nobinobi_core.functions import AdminInlineWithSelectRelated
+from rangefilter.filter import DateRangeFilter
 
-from nobinobi_staff.forms import AbsenceAdminForm
-from .models import Absence, Qualification, Team, Staff, AbsenceType, AbsenceAttachment
+from nobinobi_staff.forms import AbsenceAdminForm, RightTrainingAdminForm
+from .models import Absence, Qualification, Team, Staff, AbsenceType, AbsenceAttachment, Training, RightTraining
 
 
 class InlineAbsenceFormset(BaseInlineFormSet):
@@ -136,10 +140,11 @@ class AbsenceAdmin(admin.ModelAdmin):
     form = AbsenceAdminForm
     suit_form_tabs = (('info', _('Absence informations')), ('file', _('Files')),)
     inlines = (AbsenceAttachmentInline,)
-    list_filter = ('abs_type', 'start_date', 'end_date')
+    list_filter = ('abs_type', ('start_date', DateRangeFilter), ('end_date', DateRangeFilter))
     list_display = ('staff', 'abs_type', 'start_date', 'end_date')
     ordering = ('-start_date',)
     search_fields = ('staff__last_name', 'staff__first_name')
+    save_as = True
     fieldsets = [
         (_('Information'),
          {
@@ -149,7 +154,7 @@ class AbsenceAdmin(admin.ModelAdmin):
         (_('Date'),
          {
              'classes': ('suit-tab', 'suit-tab-info',),
-             'fields': ['start_date', 'end_date', 'all_day'],
+             'fields': ['start_date', 'end_date', 'all_day', 'partial_disability'],
          }),
         (_('Comment'),
          {
@@ -157,6 +162,7 @@ class AbsenceAdmin(admin.ModelAdmin):
              'fields': ['comment'],
          }),
     ]
+
 
 @admin.register(AbsenceType)
 class AbsenceTypeAdmin(admin.ModelAdmin):
@@ -180,3 +186,16 @@ class TeamAdmin(admin.ModelAdmin):
     readonly_fields = ("slug",)
     ordering = ('order', 'name',)
     search_fields = ('name',)
+
+
+@admin.register(RightTraining)
+class RightTrainingAdmin(admin.ModelAdmin):
+    readonly_fields = ("start_month", "start_day")
+    form = RightTrainingAdminForm
+
+
+@admin.register(Training)
+class TrainingAdmin(admin.ModelAdmin):
+    readonly_fields = ("default_number_days", "start_date", "end_date", "staff")
+    fields = ("default_number_days", "number_days", "start_date", "end_date", "staff")
+    list_display = ("staff", "start_date", "end_date", "default_number_days", "number_days")
