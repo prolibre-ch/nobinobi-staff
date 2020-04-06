@@ -102,5 +102,13 @@
       "reason": "A traiter",
       "abbr": "ATR"
     }
+  },
+  {
+    "model": "nobinobi_staff.absencetype",
+    "pk": 14,
+    "fields": {
+      "reason": "Service militaire",
+      "abbr": "SEM"
+    }
   }
 ]
