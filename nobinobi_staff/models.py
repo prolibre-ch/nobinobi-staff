@@ -137,7 +137,7 @@ class Absence(models.Model):
     abs_type = models.ForeignKey(
         "AbsenceType",
         verbose_name=_("Absence type"),
-        on_delete=models.SET_NULL,
+        on_delete=models.PROTECT,
         blank=False,
         null=True
     )
