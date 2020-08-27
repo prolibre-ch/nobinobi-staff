@@ -6,10 +6,18 @@ Nobinobi Staff
     :target: https://badge.fury.io/py/nobinobi-staff
 
 .. image:: https://travis-ci.org/alu/nobinobi-staff.svg?branch=master
-    :target: https://travis-ci.org/alu/nobinobi-staff
+    :target: https://travis-ci.org/prolibre-ch/nobinobi-staff
 
 .. image:: https://codecov.io/gh/alu/nobinobi-staff/branch/master/graph/badge.svg
-    :target: https://codecov.io/gh/alu/nobinobi-staff
+    :target: https://codecov.io/gh/prolibre-ch/nobinobi-staff
+
+.. image:: https://pyup.io/repos/github/prolibre-ch/nobinobi-staff/shield.svg
+     :target: https://pyup.io/repos/github/prolibre-ch/nobinobi-staff/
+     :alt: Updates
+
+.. image:: https://pyup.io/repos/github/prolibre-ch/nobinobi-staff/python-3-shield.svg
+     :target: https://pyup.io/repos/github/prolibre-ch/nobinobi-staff/
+     :alt: Python 3
 
 Application staff for nobinobi
 
