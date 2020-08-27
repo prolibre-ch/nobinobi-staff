@@ -2,10 +2,6 @@
 
 language: python
 
-branches:
-  only:
-    - master
-
 matrix:
     include:
       - stage: Tests (Python 3.8)
