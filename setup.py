@@ -73,7 +73,7 @@ setup(
     include_package_data=True,
     install_requires=[
         "djangorestframework==3.11.1", "django==3.1", "django-model-utils==4.0.0", "arrow==0.16.0",
-        "django-crispy-forms==1.9.2", "django-extensions==3.0.5", "django-auto-one-to-one==3.3.1",
+        "django-crispy-forms==1.9.2", "django-extensions==3.0.5", "djangorestframework-datatables==0.5.2",
         "django-bootstrap-datepicker-plus==3.0.5", "django-admin-rangefilter==0.6.2", "DateTimeRange==1.0.0",
         "nobinobi-core==0.1.0"],
     zip_safe=False,

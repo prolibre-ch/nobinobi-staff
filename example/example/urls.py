@@ -35,7 +35,7 @@ from django.views import defaults as default_views
 from nobinobi_core import urls as nobinobi_core_urls
 
 urlpatterns = [
-    path(r'^admin/', admin.site.urls),
+    path('admin/', admin.site.urls),
     path('', include(nobinobi_core_urls)),
     path('', include('nobinobi_staff.urls', namespace='nobinobi_staff')),
 ]

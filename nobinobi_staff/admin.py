@@ -153,7 +153,6 @@ class StaffAdmin(admin.ModelAdmin):
 @admin.register(Absence)
 class AbsenceAdmin(admin.ModelAdmin):
     form = AbsenceAdminForm
-    suit_form_tabs = (('info', _('Absence informations')), ('file', _('Files')),)
     inlines = (AbsenceAttachmentInline,)
     list_filter = ('abs_type', ('start_date', DateRangeFilter), ('end_date', DateRangeFilter))
     list_display = ('staff', 'abs_type', 'start_date', 'end_date')
@@ -163,17 +162,14 @@ class AbsenceAdmin(admin.ModelAdmin):
     fieldsets = [
         (_('Information'),
          {
-             'classes': ('suit-tab', 'suit-tab-info',),
              'fields': ['staff', 'abs_type'],
          }),
         (_('Date'),
          {
-             'classes': ('suit-tab', 'suit-tab-info',),
              'fields': ['start_date', 'end_date', 'all_day', 'partial_disability'],
          }),
         (_('Comment'),
          {
-             'classes': ('suit-tab', 'suit-tab-info',),
              'fields': ['comment'],
          }),
     ]
