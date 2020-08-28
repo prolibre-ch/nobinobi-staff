@@ -1,0 +1,114 @@
+[
+  {
+    "model": "nobinobi_staff.absencetype",
+    "pk": 1,
+    "fields": {
+      "reason": "Unjustified absence",
+      "abbr": "UABS"
+    }
+  },
+  {
+    "model": "nobinobi_staff.absencetype",
+    "pk": 2,
+    "fields": {
+      "reason": "Disease",
+      "abbr": "DIS"
+    }
+  },
+  {
+    "model": "nobinobi_staff.absencetype",
+    "pk": 3,
+    "fields": {
+      "reason": "Accident",
+      "abbr": "ACC"
+    }
+  },
+  {
+    "model": "nobinobi_staff.absencetype",
+    "pk": 4,
+    "fields": {
+      "reason": "Unpaid leave",
+      "abbr": "ULEAVE"
+    }
+  },
+  {
+    "model": "nobinobi_staff.absencetype",
+    "pk": 5,
+    "fields": {
+      "reason": "Maternity leave",
+      "abbr": "MAT"
+    }
+  },
+  {
+    "model": "nobinobi_staff.absencetype",
+    "pk": 6,
+    "fields": {
+      "reason": "Paternity leave",
+      "abbr": "PAT"
+    }
+  },
+  {
+    "model": "nobinobi_staff.absencetype",
+    "pk": 7,
+    "fields": {
+      "reason": "Special leave (death, marriage)",
+      "abbr": "SPL"
+    }
+  },
+  {
+    "model": "nobinobi_staff.absencetype",
+    "pk": 8,
+    "fields": {
+      "reason": "Moving",
+      "abbr": "MOV"
+    }
+  },
+  {
+    "model": "nobinobi_staff.absencetype",
+    "pk": 9,
+    "fields": {
+      "reason": "Family leave (sick child)",
+      "abbr": "FAL"
+    }
+  },
+  {
+    "model": "nobinobi_staff.absencetype",
+    "pk": 10,
+    "fields": {
+      "reason": "Training",
+      "abbr": "TRA"
+    }
+  },
+  {
+    "model": "nobinobi_staff.absencetype",
+    "pk": 11,
+    "fields": {
+      "reason": "Vacations",
+      "abbr": "VAC"
+    }
+  },
+  {
+    "model": "nobinobi_staff.absencetype",
+    "pk": 12,
+    "fields": {
+      "reason": "Recovery",
+      "abbr": "REC"
+    }
+  },
+  {
+    "model": "nobinobi_staff.absencetype",
+    "pk": 13,
+    "fields": {
+      "reason": "To be treated",
+      "abbr": "TBT"
+    }
+  },
+  {
+    "model": "nobinobi_staff.absencetype",
+    "pk": 14,
+    "fields": {
+      "reason": "Military Service",
+      "abbr": "MS"
+    }
+  }
+]
