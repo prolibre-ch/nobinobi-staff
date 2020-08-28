@@ -32,10 +32,12 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from django.urls import path
 from django.views import defaults as default_views
+from nobinobi_core import urls as nobinobi_core_urls
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
-    url(r'', include('nobinobi_staff.urls', namespace='nobinobi_staff')),
+    path(r'^admin/', admin.site.urls),
+    path('', include(nobinobi_core_urls)),
+    path('', include('nobinobi_staff.urls', namespace='nobinobi_staff')),
 ]
 
 if settings.DEBUG:

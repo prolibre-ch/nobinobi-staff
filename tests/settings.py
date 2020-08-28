@@ -37,7 +37,9 @@ INSTALLED_APPS = [
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sites",
-    "nobinobi_staff",
+    'rangefilter',
+    'nobinobi_core.apps.NobinobiCoreConfig',
+    'nobinobi_staff.apps.NobinobiStaffConfig',
 ]
 
 SITE_ID = 1

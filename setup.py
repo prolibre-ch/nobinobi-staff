@@ -38,10 +38,10 @@ def get_version(*file_paths):
 
 version = get_version("nobinobi_staff", "__init__.py")
 
-
 if sys.argv[-1] == 'publish':
     try:
         import wheel
+
         print("Wheel version: ", wheel.__version__)
     except ImportError:
         print('Wheel library missing. Please run "pip install wheel"')
@@ -71,8 +71,11 @@ setup(
         'nobinobi_staff',
     ],
     include_package_data=True,
-    install_requires=["django-model-utils>=2.0", "arrow>=0.12", "django-crispy-forms>=1.7.0",
-                      "django-extensions>=2.1.3",],
+    install_requires=[
+        "djangorestframework==3.11.1", "django==3.1", "django-model-utils==4.0.0", "arrow==0.16.0",
+        "django-crispy-forms==1.9.2", "django-extensions==3.0.5", "django-auto-one-to-one==3.3.1",
+        "django-bootstrap-datepicker-plus==3.0.5", "django-admin-rangefilter==0.6.2", "DateTimeRange==1.0.0",
+        "nobinobi-core==0.1.0"],
     zip_safe=False,
     keywords='nobinobi-staff',
     classifiers=[

@@ -56,8 +56,8 @@ INSTALLED_APPS = [
     'bootstrap_datepicker_plus',
     'rest_framework_datatables',
     'rangefilter',
-    'nobinobi_core',
-    'nobinobi_staff',
+    'nobinobi_core.apps.NobinobiCoreConfig',
+    'nobinobi_staff.apps.NobinobiStaffConfig',
 
     # if your app has other dependencies that need to be added to the site
     # they should be added here
@@ -124,7 +124,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
 
-LANGUAGE_CODE = 'fr-fr'
+LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'Europe/Zurich'
 
