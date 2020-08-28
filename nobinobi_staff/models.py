@@ -27,7 +27,6 @@ from django.utils import timezone
 from django.utils.text import slugify
 from django.utils.timezone import make_aware
 from django.utils.translation import gettext as _
-from django_auto_one_to_one import AutoOneToOneModel
 from model_utils import Choices
 from model_utils.models import StatusField, TimeStampedModel
 
