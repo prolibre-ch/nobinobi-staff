@@ -1,4 +1,19 @@
 # coding=utf-8
+
+#      Copyright (C) 2020 <Florian Alu - Prolibre - https://prolibre.com
+#      This program is free software: you can redistribute it and/or modify
+#      it under the terms of the GNU Affero General Public License as
+#      published by the Free Software Foundation, either version 3 of the
+#      License, or (at your option) any later version.
+#
+#      This program is distributed in the hope that it will be useful,
+#      but WITHOUT ANY WARRANTY; without even the implied warranty of
+#      MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#      GNU Affero General Public License for more details.
+#
+#      You should have received a copy of the GNU Affero General Public License
+#      along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
 import arrow
 from django.contrib import admin
 from django.contrib.admin import StackedInline, helpers
@@ -138,7 +153,6 @@ class StaffAdmin(admin.ModelAdmin):
 @admin.register(Absence)
 class AbsenceAdmin(admin.ModelAdmin):
     form = AbsenceAdminForm
-    suit_form_tabs = (('info', _('Absence informations')), ('file', _('Files')),)
     inlines = (AbsenceAttachmentInline,)
     list_filter = ('abs_type', ('start_date', DateRangeFilter), ('end_date', DateRangeFilter))
     list_display = ('staff', 'abs_type', 'start_date', 'end_date')
@@ -148,17 +162,14 @@ class AbsenceAdmin(admin.ModelAdmin):
     fieldsets = [
         (_('Information'),
          {
-             'classes': ('suit-tab', 'suit-tab-info',),
              'fields': ['staff', 'abs_type'],
          }),
         (_('Date'),
          {
-             'classes': ('suit-tab', 'suit-tab-info',),
              'fields': ['start_date', 'end_date', 'all_day', 'partial_disability'],
          }),
         (_('Comment'),
          {
-             'classes': ('suit-tab', 'suit-tab-info',),
              'fields': ['comment'],
          }),
     ]

@@ -1,4 +1,19 @@
 # coding=utf-8
+
+#      Copyright (C) 2020 <Florian Alu - Prolibre - https://prolibre.com
+#      This program is free software: you can redistribute it and/or modify
+#      it under the terms of the GNU Affero General Public License as
+#      published by the Free Software Foundation, either version 3 of the
+#      License, or (at your option) any later version.
+#
+#      This program is distributed in the hope that it will be useful,
+#      but WITHOUT ANY WARRANTY; without even the implied warranty of
+#      MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#      GNU Affero General Public License for more details.
+#
+#      You should have received a copy of the GNU Affero General Public License
+#      along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
 import datetime
 import os
 import uuid
@@ -12,7 +27,6 @@ from django.utils import timezone
 from django.utils.text import slugify
 from django.utils.timezone import make_aware
 from django.utils.translation import gettext as _
-from django_auto_one_to_one import AutoOneToOneModel
 from model_utils import Choices
 from model_utils.models import StatusField, TimeStampedModel
 
@@ -137,7 +151,7 @@ class Absence(models.Model):
     abs_type = models.ForeignKey(
         "AbsenceType",
         verbose_name=_("Absence type"),
-        on_delete=models.SET_NULL,
+        on_delete=models.PROTECT,
         blank=False,
         null=True
     )

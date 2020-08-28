@@ -3,7 +3,7 @@ Contributing
 ============
 
 Contributions are welcome, and they are greatly appreciated! Every
-little bit helps, and credit will always be given. 
+little bit helps, and credit will always be given.
 
 You can contribute in many ways:
 
@@ -34,7 +34,7 @@ is open to whoever wants to implement it.
 Write Documentation
 ~~~~~~~~~~~~~~~~~~~
 
-Nobinobi Staff could always use more documentation, whether as part of the 
+Nobinobi Staff could always use more documentation, whether as part of the
 official Nobinobi Staff docs, in docstrings, or even on the web in blog posts,
 articles, and such.
 
@@ -56,7 +56,7 @@ Ready to contribute? Here's how to set up `nobinobi-staff` for local development
 1. Fork the `nobinobi-staff` repo on Gogs.
 2. Clone your fork locally::
 
-    $ git clone http://fadia.lan.prolibre.com:10080/alu/nobinobi-staff.git
+    $ git clone https://github.com/prolibre-ch/nobinobi-staff.git
 
 3. Install your local copy into a virtualenv. Assuming you have virtualenvwrapper installed, this is how you set up your fork for local development::
 
@@ -77,7 +77,7 @@ Ready to contribute? Here's how to set up `nobinobi-staff` for local development
         $ python setup.py test
         $ tox
 
-   To get flake8 and tox, just pip install them into your virtualenv. 
+   To get flake8 and tox, just pip install them into your virtualenv.
 
 6. Commit your changes and push your branch to Gogs::
 

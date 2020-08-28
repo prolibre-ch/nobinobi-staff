@@ -10,6 +10,20 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
+#      Copyright (C) 2020 <Florian Alu - Prolibre - https://prolibre.com
+#      This program is free software: you can redistribute it and/or modify
+#      it under the terms of the GNU Affero General Public License as
+#      published by the Free Software Foundation, either version 3 of the
+#      License, or (at your option) any later version.
+#
+#      This program is distributed in the hope that it will be useful,
+#      but WITHOUT ANY WARRANTY; without even the implied warranty of
+#      MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#      GNU Affero General Public License for more details.
+#
+#      You should have received a copy of the GNU Affero General Public License
+#      along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -29,7 +43,6 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'suit',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -42,8 +55,8 @@ INSTALLED_APPS = [
     'bootstrap_datepicker_plus',
     'rest_framework_datatables',
     'rangefilter',
-    'nobinobi_core',
-    'nobinobi_staff',
+    'nobinobi_core.apps.NobinobiCoreConfig',
+    'nobinobi_staff.apps.NobinobiStaffConfig',
 
     # if your app has other dependencies that need to be added to the site
     # they should be added here
@@ -110,7 +123,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
 
-LANGUAGE_CODE = 'fr-fr'
+LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'Europe/Zurich'
 
