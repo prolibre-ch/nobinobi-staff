@@ -1,9 +1,9 @@
 djangorestframework==3.11.1
-django==3.1
+django==3.1.1
 django-model-utils==4.0.0
 arrow==0.16.0
 django-crispy-forms==1.9.2
-django-extensions==3.0.5
+django-extensions==3.0.6
 django-bootstrap-datepicker-plus==3.0.5
 django-admin-rangefilter==0.6.2
 DateTimeRange==1.0.0
