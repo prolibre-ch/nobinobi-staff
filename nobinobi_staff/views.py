@@ -30,6 +30,12 @@ class ListStaffReadOnly(TemplateView, LoginRequiredMixin, object):
     template_name = "staff/staff_list_readonly.html"
 
     def get(self, request, *args, **kwargs):
+        """
+        Args:
+            request:
+            *args:
+            **kwargs:
+        """
         context = self.get_context_data(**kwargs)
         context['title'] = _("Staffes list")
         context["staffes"] = Staff.objects.filter(active=True)
