@@ -5,10 +5,10 @@ Nobinobi Staff
 .. image:: https://badge.fury.io/py/nobinobi-staff.svg
     :target: https://badge.fury.io/py/nobinobi-staff
 
-.. image:: https://travis-ci.org/alu/nobinobi-staff.svg?branch=master
+.. image:: https://travis-ci.org/prolibre-ch/nobinobi-staff.svg?branch=master
     :target: https://travis-ci.org/prolibre-ch/nobinobi-staff
 
-.. image:: https://codecov.io/gh/alu/nobinobi-staff/branch/master/graph/badge.svg
+.. image:: https://codecov.io/gh/prolibre-ch/nobinobi-staff/branch/master/graph/badge.svg
     :target: https://codecov.io/gh/prolibre-ch/nobinobi-staff
 
 .. image:: https://pyup.io/repos/github/prolibre-ch/nobinobi-staff/shield.svg

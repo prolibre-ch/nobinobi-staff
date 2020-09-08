@@ -14,18 +14,15 @@
 #      You should have received a copy of the GNU Affero General Public License
 #      along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-import datetime
 import os
 import uuid
 
 import arrow
 from datetimerange import DateTimeRange
-from django.contrib.auth.models import User
+from django.conf import settings
 from django.db import models
 from django.db.models.functions import Upper
-from django.utils import timezone
 from django.utils.text import slugify
-from django.utils.timezone import make_aware
 from django.utils.translation import gettext as _
 from model_utils import Choices
 from model_utils.models import StatusField, TimeStampedModel
@@ -37,11 +34,11 @@ GENDER_CHOICE = Choices(
 )
 
 
-# Create your models here.
 class Staff(models.Model):
+    """Models to store staff information"""
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     user = models.OneToOneField(
-        User,
+        settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
         verbose_name=_('user'),
         null=True,
@@ -77,41 +74,35 @@ class Staff(models.Model):
     working_time = models.FloatField(_("Working time"))
     working_base = models.FloatField(verbose_name=_("Working base"), default=40)
 
-    # recorded_time = models.FloatField(_("Temps enregistré"), default=0)
-    # temps_prep_enregistre = models.FloatField(_("Temps de préparation enregistré"), default=0)
     active = models.BooleanField(verbose_name=_("Active"), default=True)
     arrival_date = models.DateField(_("Arrival date"), null=True)
     departure_date = models.DateField(_("Departure Date"), null=True, blank=True)
 
-    # date_desactivation = models.DateField(_("Date de désactivation"), null=True, blank=True)
-    # date_reactivation = models.DateField(_("Date de réactivation"), null=True, blank=True)
-    # heure_sup = models.FloatField(_("Heure supplémentaire"), default=0)
-    # base_classroom = models.ForeignKey(
-    #     Classroom,
-    #     verbose_name=_("Salle de classe"),
-    #     on_delete=models.SET_NULL,
-    #     blank=True,
-    #     null=True
-    # )
-
     def _get_racc_name(self):
+        """Get short name for staff"""
         return '%s%s' % (slugify(str.lower(self.first_name[:2])), slugify(str.lower(self.last_name[:1])))
 
     racc = property(_get_racc_name)
 
     @property
     def full_name(self):
+        """Get fullname of staff"""
         return "{0} {1}".format(self.first_name, self.last_name)
 
     def __str__(self):  # __unicode__ on Python 2
-        # Returns the person's full name.
+        """Returns the staff's full name."""
         return '%s %s' % (self.first_name, self.last_name)  #
 
     def save(self, *args, **kwargs):
+        """Save the Staff models
+
+        Args:
+            *args:
+            **kwargs:
+        """
         self.last_name = self.last_name.title()
         self.first_name = self.first_name.title()
         percentage = self.percentage_work
-        # qualification = self.qualification_id
         # on check si le percentage est entre 0 et 100
         if percentage <= 100 or percentage > 0:
             # on init les valeurs constantes
@@ -120,9 +111,10 @@ class Staff(models.Model):
             work = (percentage / 100) * base_work
             self.working_time = work
 
-        super(Staff, self).save(*args, **kwargs)
+        return super(Staff, self).save(*args, **kwargs)
 
     class Meta:
+        """Set information of class Staff"""
         ordering = ['first_name', 'last_name']
         verbose_name_plural = _("Staffes")
         verbose_name = _("Staff")
@@ -130,18 +122,22 @@ class Staff(models.Model):
 
 
 class Qualification(models.Model):
+    """Models for store Qualification"""
     name = models.TextField(_("Name"))
     short_name = models.CharField(_("Short name"), max_length=255)
     order = models.IntegerField(_("Order"), default=1)
 
     class Meta:
+        """Set information of class Qualification"""
         ordering = ('order',)
 
-    def __str__(self):  # __unicode__ on Python 2
+    def __str__(self):
+        """return name of qualification"""
         return self.name
 
 
 class Absence(models.Model):
+    """Models for store Absence"""
     staff = models.ForeignKey(
         Staff,
         verbose_name=_("Staff"),
@@ -159,14 +155,24 @@ class Absence(models.Model):
     end_date = models.DateTimeField(_("End date"))
     all_day = models.BooleanField(_("All day"), default=False)
     comment = models.TextField(_("Comment"), blank=True, null=True)
-    partial_disability = models.IntegerField(_("Partial disability"), blank=True, null=True, help_text=_("In percentage %"))
+    partial_disability = models.IntegerField(_("Partial disability"), blank=True, null=True,
+                                             help_text=_("In percentage %"))
 
-    def __str__(self):  # __unicode__ on Python 2
+    def __str__(self):
+        """Return de str for absence
+
+        Returns:
+            str: ""
+        """
         return '%s | %s | %s - %s' % (
             self.staff, self.abs_type, arrow.get(self.start_date).format("DD-MM-YYYY"),
             arrow.get(self.end_date).format("DD-MM-YYYY"))
 
     def _get_range_absence(self):
+        """
+        Returns:
+            DateTimeRange:
+        """
         return DateTimeRange(self.start_date, self.end_date)
 
     range_absence = property(_get_range_absence)
@@ -186,6 +192,13 @@ class AbsenceType(models.Model):
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
         # save abbreviation in CAPITAL
+        """
+        Args:
+            force_insert:
+            force_update:
+            using:
+            update_fields:
+        """
         if self.abbr:
             Upper(self.abbr)
         return super(AbsenceType, self).save()
@@ -213,6 +226,11 @@ class Team(models.Model):
         return unique_slug
 
     def save(self, *args, **kwargs):
+        """
+        Args:
+            *args:
+            **kwargs:
+        """
         if not self.slug:
             self.slug = self._get_unique_slug()
         super(Team, self).save(*args, **kwargs)
@@ -225,6 +243,10 @@ class AbsenceAttachment(models.Model):
     )
 
     def generate_new_filename(self, filename):
+        """
+        Args:
+            filename:
+        """
         f, ext = os.path.splitext(filename)
         upload_to = "staff/{}/absence/".format(self.absence.staff.racc)
         return '{}{}{}'.format(upload_to, uuid.uuid4().hex, ext)
