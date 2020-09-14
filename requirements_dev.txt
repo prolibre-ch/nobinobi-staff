@@ -8,7 +8,7 @@ ipdb==0.13.3  # https://github.com/gotcha/ipdb
 # Code quality
 # ------------------------------------------------------------------------------
 flake8==3.8.3  # https://github.com/PyCQA/flake8
-coverage==5.2.1  # https://github.com/nedbat/coveragepy
+coverage==5.3  # https://github.com/nedbat/coveragepy
 
 # Django
 # ------------------------------------------------------------------------------
