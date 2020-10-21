@@ -16,4 +16,4 @@ factory-boy==3.1.0  # https://github.com/FactoryBoy/factory_boy
 django-test-plus==1.4.0  # https://github.com/revsys/django-test-plus
 
 django-debug-toolbar==3.1.1  # https://github.com/jazzband/django-debug-toolbar
-pytest-django==3.10.0  # https://github.com/pytest-dev/pytest-django
+pytest-django==4.0.0  # https://github.com/pytest-dev/pytest-django
