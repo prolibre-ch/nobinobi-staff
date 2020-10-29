@@ -1,16 +1,17 @@
-#      Copyright (C) 2020 <Florian Alu - Prolibre - https://prolibre.com
-#      This program is free software: you can redistribute it and/or modify
-#      it under the terms of the GNU Affero General Public License as
-#      published by the Free Software Foundation, either version 3 of the
-#      License, or (at your option) any later version.
+#  Copyright (C) 2020 <Florian Alu - Prolibre - https://prolibre.com
+#  This program is free software: you can redistribute it and/or modify
+#  it under the terms of the GNU Affero General Public License as
+#  published by the Free Software Foundation, either version 3 of the
+#  License, or (at your option) any later version.
 #
-#      This program is distributed in the hope that it will be useful,
-#      but WITHOUT ANY WARRANTY; without even the implied warranty of
-#      MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#      GNU Affero General Public License for more details.
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU Affero General Public License for more details.
 #
-#      You should have received a copy of the GNU Affero General Public License
-#      along with this program.  If not, see <https://www.gnu.org/licenses/>.
+#  You should have received a copy of the GNU Affero General Public License
+#  along with this program.  If not, see <https://www.gnu.org/licenses/>.
+#
 
 from django.apps import AppConfig
 from django.conf import settings
@@ -36,11 +37,6 @@ def load_group_and_permissions(sender, **kwargs):
         groupe_personnel.permissions.add(permission)
 
 
-def load_fixtures_personal(sender, **kwargs):
-    from django.core.management import call_command
-    call_command("loaddata", "staff_absence_type_{}".format(settings.LANGUAGE_CODE))
-
-
 class NobinobiStaffConfig(AppConfig, object):
     name = 'nobinobi_staff'
     verbose_name = _("Staff")
@@ -48,5 +44,5 @@ class NobinobiStaffConfig(AppConfig, object):
 
     def ready(self):
         import nobinobi_staff.signals
-        post_migrate.connect(load_fixtures_personal, sender=self)
+        # post_migrate.connect(load_fixtures_personal, sender=self)
         # post_migrate.connect(load_group_and_permissions, sender=self)

@@ -21,6 +21,6 @@ Add Nobinobi Staff's URL patterns:
 
     urlpatterns = [
         ...
-        url(r'^', include(nobinobi_staff_urls)),
+        path('', include(nobinobi_staff_urls)),
         ...
     ]

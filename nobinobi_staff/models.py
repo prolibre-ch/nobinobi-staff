@@ -1,18 +1,18 @@
 # coding=utf-8
 
-#      Copyright (C) 2020 <Florian Alu - Prolibre - https://prolibre.com
-#      This program is free software: you can redistribute it and/or modify
-#      it under the terms of the GNU Affero General Public License as
-#      published by the Free Software Foundation, either version 3 of the
-#      License, or (at your option) any later version.
+#  Copyright (C) 2020 <Florian Alu - Prolibre - https://prolibre.com
+#  This program is free software: you can redistribute it and/or modify
+#  it under the terms of the GNU Affero General Public License as
+#  published by the Free Software Foundation, either version 3 of the
+#  License, or (at your option) any later version.
 #
-#      This program is distributed in the hope that it will be useful,
-#      but WITHOUT ANY WARRANTY; without even the implied warranty of
-#      MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#      GNU Affero General Public License for more details.
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU Affero General Public License for more details.
 #
-#      You should have received a copy of the GNU Affero General Public License
-#      along with this program.  If not, see <https://www.gnu.org/licenses/>.
+#  You should have received a copy of the GNU Affero General Public License
+#  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import os
 import uuid
@@ -23,9 +23,9 @@ from django.conf import settings
 from django.db import models
 from django.db.models.functions import Upper
 from django.utils.text import slugify
-from django.utils.translation import gettext as _
+from django.utils.translation import gettext_lazy as _
 from model_utils import Choices
-from model_utils.models import StatusField, TimeStampedModel
+from model_utils.models import StatusField, TimeStampedModel, StatusModel
 
 GENDER_CHOICE = Choices(
     (0, "man", _('Man')),
@@ -34,8 +34,28 @@ GENDER_CHOICE = Choices(
 )
 
 
-class Staff(models.Model):
+class Staff(TimeStampedModel, StatusModel):
     """Models to store staff information"""
+
+    STATUS = Choices(
+        ('active', _("Active")),
+        ('archived', _("Archived")),
+    )
+
+    class CivilStatusChoice(models.TextChoices):
+        __empty__ = _('(Unknown)')
+        SINGLE = "single", _('Single')
+        MARRIED = "married", _('Married')
+        REGPART = "registered_partnership", _('Registered Partnership')
+        SEPARATED = "separate", _('Separate')
+        DIVORCED = "divorced", _('Divorced')
+        WIDOWER = "widower", _('Widower')
+
+    def upload_picture(self, filename):
+        f, ext = os.path.splitext(filename)
+        upload_to = "staff/%s/" % self.racc
+        return '%s%s%s' % (upload_to, uuid.uuid4().hex, ext)
+
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     user = models.OneToOneField(
         settings.AUTH_USER_MODEL,
@@ -48,12 +68,17 @@ class Staff(models.Model):
     first_name = models.CharField(_("First name"), max_length=255)
     gender = models.SmallIntegerField(choices=GENDER_CHOICE, verbose_name=_("Gender"), blank=False, null=True)
     birth_date = models.DateField(verbose_name=_("Birth Date"), blank=True, null=True)
+    picture = models.ImageField(_("Picture"), upload_to=upload_picture, blank=True, null=True)
     street = models.CharField(_('Street'), max_length=255, null=True, blank=True)
     zip = models.PositiveIntegerField(_('ZIP'), null=True, blank=True)
     city = models.CharField(_('City'), max_length=50, null=True, blank=True)
     phone = models.CharField(_('Phone'), max_length=50, null=True, blank=True)
     mobile_phone = models.CharField(_('Mobile phone'), max_length=50, null=True, blank=True)
-    avs = models.CharField(_('AVS'), max_length=16, null=True, blank=True)
+    nationality = models.CharField(_("Nationality"), max_length=255, blank=True, null=True)
+    civil_status = models.CharField(_("Civil status"), max_length=25, choices=CivilStatusChoice.choices,
+                                    default=CivilStatusChoice.__empty__, blank=True,
+                                    null=True)
+    social_security_number = models.CharField(_('Social security number'), max_length=50, null=True, blank=True)
     email = models.EmailField(_('Email'), null=True, blank=True)
     team = models.ForeignKey(
         to="Team",
@@ -74,7 +99,7 @@ class Staff(models.Model):
     working_time = models.FloatField(_("Working time"))
     working_base = models.FloatField(verbose_name=_("Working base"), default=40)
 
-    active = models.BooleanField(verbose_name=_("Active"), default=True)
+    active_status = models.BooleanField(verbose_name=_("Active"), default=True)
     arrival_date = models.DateField(_("Arrival date"), null=True)
     departure_date = models.DateField(_("Departure Date"), null=True, blank=True)
 
