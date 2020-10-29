@@ -3,6 +3,17 @@
 History
 -------
 
+0.1.4 (2020-10-29)
+++++++++++++++++++++
+
+* Add fields ["picture", "nationality", "civil_status", "status", "status_modified", "created", "modified"].
+* Rename field "avs" to "social_security_number".
+* Rename field "active" to "active_status".
+* Add method to archive staff when select in admin staff list.
+* Update search_field, list_display, list_filter fields.
+* Remove load absence_type auto, now you have to load data.
+* Update traduction FR.
+
 0.1.3.1 (2020-09-08)
 ++++++++++++++++++++
 
