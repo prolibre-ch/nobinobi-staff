@@ -1,20 +1,5 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
-#      Copyright (C) 2020 <Florian Alu - Prolibre - https://prolibre.com
-#      This program is free software: you can redistribute it and/or modify
-#      it under the terms of the GNU Affero General Public License as
-#      published by the Free Software Foundation, either version 3 of the
-#      License, or (at your option) any later version.
-#
-#      This program is distributed in the hope that it will be useful,
-#      but WITHOUT ANY WARRANTY; without even the implied warranty of
-#      MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#      GNU Affero General Public License for more details.
-#
-#      You should have received a copy of the GNU Affero General Public License
-#      along with this program.  If not, see <https://www.gnu.org/licenses/>.
-
 import os
 import re
 import sys
@@ -38,10 +23,10 @@ def get_version(*file_paths):
 
 version = get_version("nobinobi_staff", "__init__.py")
 
+
 if sys.argv[-1] == 'publish':
     try:
         import wheel
-
         print("Wheel version: ", wheel.__version__)
     except ImportError:
         print('Wheel library missing. Please run "pip install wheel"')
@@ -58,6 +43,7 @@ if sys.argv[-1] == 'tag':
 
 readme = open('README.rst').read()
 history = open('HISTORY.rst').read().replace('.. :changelog:', '')
+requirements = open('requirements.txt').readlines()
 
 setup(
     name='nobinobi-staff',
@@ -71,11 +57,7 @@ setup(
         'nobinobi_staff',
     ],
     include_package_data=True,
-    install_requires=[
-        "djangorestframework==3.11.1", "django==3.1.1", "django-model-utils==4.0.0", "arrow==0.16.0",
-        "django-crispy-forms==1.9.2", "django-extensions==3.0.6", "djangorestframework-datatables==0.5.2",
-        "django-bootstrap-datepicker-plus==3.0.5", "django-admin-rangefilter==0.6.2", "DateTimeRange==1.0.0",
-        "nobinobi-core==0.1.0"],
+    install_requires=requirements,
     zip_safe=False,
     keywords='nobinobi-staff',
     classifiers=[

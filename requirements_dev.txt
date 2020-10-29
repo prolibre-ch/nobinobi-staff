@@ -1,4 +1,7 @@
-bumpversion==0.6.0
+invoke==1.4.1
+twine==3.2.0
+zest.releaser==6.22.1
+
 wheel==0.35.1
 django-model-utils==4.0.0
 

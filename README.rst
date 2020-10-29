@@ -5,8 +5,8 @@ Nobinobi Staff
 .. image:: https://badge.fury.io/py/nobinobi-staff.svg
     :target: https://badge.fury.io/py/nobinobi-staff
 
-.. image:: https://travis-ci.org/prolibre-ch/nobinobi-staff.svg?branch=master
-    :target: https://travis-ci.org/prolibre-ch/nobinobi-staff
+.. image:: https://travis-ci.com/prolibre-ch/nobinobi-staff.svg?branch=master
+    :target: https://travis-ci.com/prolibre-ch/nobinobi-staff
 
 .. image:: https://codecov.io/gh/prolibre-ch/nobinobi-staff/branch/master/graph/badge.svg
     :target: https://codecov.io/gh/prolibre-ch/nobinobi-staff
@@ -71,6 +71,16 @@ Does the code actually work?
     source <YOURVIRTUALENV>/bin/activate
     (myenv) $ pip install tox
     (myenv) $ tox
+
+
+Development commands
+---------------------
+
+::
+
+    pip install -r requirements_dev.txt
+    invoke -l
+
 
 Credits
 -------
