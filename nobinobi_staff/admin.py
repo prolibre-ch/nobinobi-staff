@@ -15,13 +15,10 @@
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import arrow
-from django.contrib import admin
-from django.contrib.admin import StackedInline, helpers
-from django.contrib.admin.exceptions import DisallowedModelAdminToField
-from django.contrib.admin.options import TO_FIELD_VAR, IS_POPUP_VAR
-from django.contrib.admin.utils import unquote
-from django.core.exceptions import ValidationError, NON_FIELD_ERRORS, PermissionDenied
-from django.forms import BaseInlineFormSet, all_valid
+from django.contrib import admin, messages
+from django.contrib.admin import StackedInline
+from django.core.exceptions import ValidationError, NON_FIELD_ERRORS
+from django.forms import BaseInlineFormSet
 from django.utils.translation import gettext as _
 from nobinobi_core.functions import AdminInlineWithSelectRelated
 from rangefilter.filter import DateRangeFilter
@@ -78,20 +75,24 @@ class StaffAdmin(admin.ModelAdmin):
 
     suit_form_tabs = (('info', _('Staff informations')), ('absences', _('Absences')),)
     list_display = (
-        'last_name', 'first_name', 'qualification', 'percentage_work', 'working_time', 'active'
+        'last_name', 'first_name', 'qualification', 'percentage_work', 'working_time', 'status'
     )
-    list_filter = ('active', 'last_name', 'first_name')
+    list_filter = ('status', 'gender', 'civil_status', "team", "qualification", "arrival_date", "departure_date")
     ordering = ('last_name',)
     inlines = (AbsenceInline,)
-    search_fields = ('last_name', 'first_name')
+    search_fields = ('last_name', 'first_name', "birth_date", "social_security_number", "email",)
     readonly_fields = ('working_time',)
     fieldsets = [
         (_('Staff informations'),
          {
              'classes': ('suit-tab', 'suit-tab-info',),
-             'fields': ['first_name', 'last_name', 'gender', 'birth_date', 'street', 'zip', 'city', 'phone',
-                        'mobile_phone', 'email', 'avs', 'active', 'team',
-                        'user']
+             'fields': [
+                 'first_name', 'last_name', 'gender', 'birth_date', 'picture', 'nationality', 'civil_status',
+                 'street', 'zip', 'city',
+                 'phone', 'mobile_phone', 'email', 'social_security_number',
+                 'status',
+                 'team', 'user'
+             ]
          }),
         (_('Qualification'),
          {
@@ -108,36 +109,26 @@ class StaffAdmin(admin.ModelAdmin):
             'fields': ['percentage_work', 'working_time']
         }), ]
 
-    # TODO:VOIR POUR SI NECCESAIRE
-    # actions = ['act_dact_staff']
-    #
-    # def act_dact_staff(self, request, queryset):
-    #     rows_updated = 0
-    #     for q in queryset:
-    #         # pour chaque selectionne
-    #         if q.actif:
-    #             # si il est actif
-    #             q.actif = False
-    #             # on le desactive et on rentre les dates
-    #             q.date_reactivation = None
-    #             q.date_desactivation = arrow.utcnow().format('YYYY-MM-DD')
-    #         # si pas actif on le met actif
-    #         else:
-    #             q.actif = True
-    #             # on rentre les dates
-    #             q.date_desactivation = None
-    #             q.date_reactivation = arrow.utcnow().format('YYYY-MM-DD')
-    #         # on sauve
-    #         q.save()
-    #         rows_updated += 1
-    #
-    #     if rows_updated == 1:
-    #         message_bit = _("1 personne a été activé/désactivé.")
-    #     else:
-    #         message_bit = _("{0} personnes ont étés activés/désactivés.").format(rows_updated)
-    #     messages.success(request, "%s" % message_bit)
-    #
-    # act_dact_staff.short_description = _("Activer/désactiver une(des) personne(s)")
+    actions = ['archive_staff']
+
+    def archive_staff(self, request, queryset):
+        rows_updated = 0
+        for q in queryset:
+            # pour chaque selection
+            if q.status == Staff.STATUS.active:
+                # Si il est actif, on l'archive
+                q.status = Staff.STATUS.archived
+            # on sauve
+            q.save()
+            rows_updated += 1
+
+        if rows_updated == 1:
+            message_bit = _("1 person has been archived")
+        else:
+            message_bit = _("{0} persons have been archived.").format(rows_updated)
+        messages.success(request, "%s" % message_bit)
+
+    archive_staff.short_description = _("Archive a person(s)")
 
     def get_formsets(self, request, obj=None):
         """

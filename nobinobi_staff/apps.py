@@ -37,11 +37,6 @@ def load_group_and_permissions(sender, **kwargs):
         groupe_personnel.permissions.add(permission)
 
 
-def load_fixtures_personal(sender, **kwargs):
-    from django.core.management import call_command
-    call_command("loaddata", "staff_absence_type_{}".format(settings.LANGUAGE_CODE))
-
-
 class NobinobiStaffConfig(AppConfig, object):
     name = 'nobinobi_staff'
     verbose_name = _("Staff")
@@ -49,5 +44,5 @@ class NobinobiStaffConfig(AppConfig, object):
 
     def ready(self):
         import nobinobi_staff.signals
-        post_migrate.connect(load_fixtures_personal, sender=self)
+        # post_migrate.connect(load_fixtures_personal, sender=self)
         # post_migrate.connect(load_group_and_permissions, sender=self)

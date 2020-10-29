@@ -38,10 +38,10 @@ class ListStaffReadOnly(TemplateView, LoginRequiredMixin, object):
         """
         context = self.get_context_data(**kwargs)
         context['title'] = _("Staffes list")
-        context["staffes"] = Staff.objects.filter(active=True)
+        context["staffes"] = Staff.objects.filter(status=Staff.STATUS.active)
         return self.render_to_response(context)
 
 
 class StaffViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = Staff.objects.filter(active=True)
+    queryset = Staff.objects.filter(status=Staff.STATUS.active)
     serializer_class = StaffSerializer
