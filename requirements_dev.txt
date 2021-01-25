@@ -2,7 +2,7 @@ invoke==1.5.0
 twine==3.3.0
 zest.releaser==6.22.1
 
-wheel==0.36.1
+wheel==0.36.2
 django-model-utils==4.1.1
 
 Werkzeug==1.0.1  # https://github.com/pallets/werkzeug
