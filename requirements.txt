@@ -1,12 +1,12 @@
 djangorestframework==3.12.2
-django==3.1.4
+django==3.1.5
 django-model-utils==4.1.1
 arrow==0.17.0
 django-crispy-forms==1.10.0
 django-extensions==3.1.0
 django-bootstrap-datepicker-plus==3.0.5
-django-admin-rangefilter==0.6.3
+django-admin-rangefilter==0.6.4
 DateTimeRange==1.0.0
 djangorestframework-datatables==0.5.2
-Pillow==8.0.1
+Pillow==8.1.0
 nobinobi-core==0.1.3
