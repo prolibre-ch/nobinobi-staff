@@ -20,6 +20,9 @@ from django.contrib.admin import StackedInline
 from django.core.exceptions import ValidationError, NON_FIELD_ERRORS
 from django.forms import BaseInlineFormSet
 from django.utils.translation import gettext as _
+from import_export import resources
+from import_export.admin import ExportActionMixin
+from import_export.fields import Field
 from nobinobi_core.functions import AdminInlineWithSelectRelated
 from rangefilter.filter import DateRangeFilter
 
@@ -66,6 +69,35 @@ class AbsenceAttachmentInline(StackedInline):
     extra = 0
     verbose_name_plural = 'AbsencesAttachment'
     suit_classes = 'suit-tab suit-tab-file'
+
+
+class AbsenceResource(resources.ModelResource):
+    staff = Field(column_name='staff')
+    # abs_type = Field(column_name='abs_type')
+    all_day = Field(column_name='all_day')
+    partial_disability = Field(column_name='partial_disability')
+
+    class Meta:
+        model = Absence
+        fields = (
+            'staff', 'abs_type__reason', 'start_date', 'end_date', 'comment', 'all_day', 'partial_disability'
+        )
+        export_order = (
+            'staff', 'abs_type__reason', 'start_date', 'end_date', 'comment', 'all_day', 'partial_disability'
+        )
+        widgets = {
+            'start_date': {'format': "%d/%m/%Y %H:%M"},
+            'end_date': {'format': "%d/%m/%Y %H:%M"},
+        }
+
+    def dehydrate_staff(self, absence):
+        return '%s' % absence.staff.full_name
+
+    def dehydrate_all_day(self, absence):
+        return _("Yes") if absence.all_day else _("No")
+
+    def dehydrate_partial_disability(self, absence):
+        return _("Yes") if absence.partial_disability else _("No")
 
 
 @admin.register(Staff)
@@ -142,9 +174,10 @@ class StaffAdmin(admin.ModelAdmin):
 
 
 @admin.register(Absence)
-class AbsenceAdmin(admin.ModelAdmin):
+class AbsenceAdmin(ExportActionMixin, admin.ModelAdmin):
     form = AbsenceAdminForm
     inlines = (AbsenceAttachmentInline,)
+    resource_class = AbsenceResource
     list_filter = ('abs_type', ('start_date', DateRangeFilter), ('end_date', DateRangeFilter))
     list_display = ('staff', 'abs_type', 'start_date', 'end_date')
     ordering = ('-start_date',)

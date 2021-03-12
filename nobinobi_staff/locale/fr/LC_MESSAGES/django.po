@@ -7,72 +7,80 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-29 15:30+0100\n"
-"PO-Revision-Date: 2020-10-29 15:32+0100\n"
-"Last-Translator: \n"
+"POT-Creation-Date: 2021-03-12 10:08+0100\n"
+"PO-Revision-Date: 2021-03-12 10:08+0100\n"
+"Last-Translator: Florian Alu <fla@grapps.fr>\n"
 "Language-Team: \n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 2.4.1\n"
+"X-Generator: Poedit 2.4.2\n"
 
-#: .\nobinobi_staff\admin.py:41
+#: .\nobinobi_staff\admin.py:44
 msgid "The start date is greater than the end date."
 msgstr "La date de début est supérieure à la date de fin."
 
-#: .\nobinobi_staff\admin.py:76 .\nobinobi_staff\admin.py:86
+#: .\nobinobi_staff\admin.py:97 .\nobinobi_staff\admin.py:100
+msgid "Yes"
+msgstr "Oui"
+
+#: .\nobinobi_staff\admin.py:97 .\nobinobi_staff\admin.py:100
+msgid "No"
+msgstr "Non"
+
+#: .\nobinobi_staff\admin.py:108 .\nobinobi_staff\admin.py:118
 msgid "Staff informations"
 msgstr "Informations personnel"
 
-#: .\nobinobi_staff\admin.py:76
+#: .\nobinobi_staff\admin.py:108
 msgid "Absences"
 msgstr "Absences"
 
-#: .\nobinobi_staff\admin.py:97 .\nobinobi_staff\models.py:93
+#: .\nobinobi_staff\admin.py:129 .\nobinobi_staff\models.py:93
 msgid "Qualification"
 msgstr "Qualification"
 
-#: .\nobinobi_staff\admin.py:102 .\nobinobi_staff\admin.py:158
+#: .\nobinobi_staff\admin.py:134 .\nobinobi_staff\admin.py:191
 msgid "Date"
 msgstr "Date"
 
-#: .\nobinobi_staff\admin.py:106
+#: .\nobinobi_staff\admin.py:138
 msgid "Planning"
 msgstr "Horaire"
 
-#: .\nobinobi_staff\admin.py:108
+#: .\nobinobi_staff\admin.py:140
 msgid "Occupancy rate (based on a 40-hour weekly schedule)"
 msgstr "Taux d'occupation (selon un horaire hebdomadaire de 40 heures)"
 
-#: .\nobinobi_staff\admin.py:126
+#: .\nobinobi_staff\admin.py:158
 msgid "1 person has been archived"
 msgstr "1 personne a été archivée"
 
-#: .\nobinobi_staff\admin.py:128
+#: .\nobinobi_staff\admin.py:160
 #, python-brace-format
 msgid "{0} persons have been archived."
 msgstr "{0} personnes ont été archivées."
 
-#: .\nobinobi_staff\admin.py:131
+#: .\nobinobi_staff\admin.py:163
 msgid "Archive a person(s)"
 msgstr "Archiver une(s) personne(s)"
 
-#: .\nobinobi_staff\admin.py:154
+#: .\nobinobi_staff\admin.py:187
 msgid "Information"
 msgstr "Information"
 
-#: .\nobinobi_staff\admin.py:162 .\nobinobi_staff\models.py:182
+#: .\nobinobi_staff\admin.py:195 .\nobinobi_staff\models.py:182
 msgid "Comment"
 msgstr "Commentaire"
 
-#: .\nobinobi_staff\apps.py:47 .\nobinobi_staff\models.py:145
+#: .\nobinobi_staff\apps.py:42 .\nobinobi_staff\models.py:145
 #: .\nobinobi_staff\models.py:168 .\nobinobi_staff\models.py:335
 msgid "Staff"
 msgstr "Personnel"
 
-#: .\nobinobi_staff\apps.py:48 .\nobinobi_staff\models.py:144
+#: .\nobinobi_staff\apps.py:43 .\nobinobi_staff\models.py:144
 msgid "Staffes"
 msgstr "Personnels"
 
