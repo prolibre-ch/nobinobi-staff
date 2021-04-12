@@ -1,4 +1,4 @@
-djangorestframework==3.12.2
+djangorestframework==3.12.4
 django==3.1.7
 django-model-utils==4.1.1
 arrow==1.0.3
