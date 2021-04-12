@@ -1,5 +1,5 @@
 invoke==1.5.0
-twine==3.4.0
+twine==3.4.1
 zest.releaser==6.22.1
 
 wheel==0.36.2
