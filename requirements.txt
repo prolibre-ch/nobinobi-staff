@@ -1,5 +1,5 @@
 djangorestframework==3.12.4
-django==3.2.3
+django==3.2.5
 django-model-utils==4.1.1
 arrow==1.1.0
 django-crispy-forms==1.11.2
