@@ -3,6 +3,12 @@
 History
 -------
 
+0.1.6.2 (2021-09-14)
++++++++++++++++++++++
+
+* Update requirements.
+* 2fb2bfa - Add signal when absence is saved and training not created
+
 0.1.6.1 (2021-06-07)
 +++++++++++++++++++++
 
