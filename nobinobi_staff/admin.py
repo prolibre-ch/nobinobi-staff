@@ -140,6 +140,7 @@ class StaffAdmin(admin.ModelAdmin):
             'description': _("Occupancy rate (based on a 40-hour weekly schedule)"),
             'fields': ['percentage_work', 'working_time']
         }), ]
+    list_select_related = ("qualification", "team")
 
     actions = ['archive_staff']
 
@@ -234,3 +235,4 @@ class TrainingAdmin(admin.ModelAdmin):
     readonly_fields = ("default_number_days", "start_date", "end_date", "staff")
     fields = ("default_number_days", "number_days", "start_date", "end_date", "staff")
     list_display = ("staff", "start_date", "end_date", "default_number_days", "number_days")
+    list_filter = ('staff', ('start_date', DateRangeFilter), ('end_date', DateRangeFilter))
