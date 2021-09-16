@@ -3,6 +3,14 @@
 History
 -------
 
+0.1.6.3 (2021-09-16)
++++++++++++++++++++++
+
+* 4d973ec - Update "update command" for training
+* 184406d - Change signals to update training when absence
+* 88245dd - Change admin display in training add select related in staff
+* 2a0b8f8 - Add method to get datetime_range in model add tracker in absence to get previous date
+
 0.1.6.2 (2021-09-14)
 +++++++++++++++++++++
 
