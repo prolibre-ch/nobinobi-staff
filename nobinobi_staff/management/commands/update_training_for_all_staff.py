@@ -15,17 +15,14 @@
 
 import datetime
 import logging
-from typing import List
 
 import arrow
 import pytz
 from datetimerange import DateTimeRange
-from django.core.exceptions import ObjectDoesNotExist
 from django.core.management.base import BaseCommand
-from django.utils.timezone import make_aware
 from django.utils.translation import gettext_lazy as _
 
-from nobinobi_staff.models import RightTraining, Staff, Training, Absence
+from nobinobi_staff.models import RightTraining, Training, Absence
 
 
 class Command(BaseCommand):
@@ -42,49 +39,44 @@ class Command(BaseCommand):
                 utc_tz = pytz.timezone("UTC")
                 for year in years:
                     start_date = arrow.get(datetime.date(int(year), rt.start_month, rt.start_day), utc_tz)
-                    end_date = start_date.shift(years=1, days=-1)
-                    absences = Absence.objects.filter(start_date__lte=end_date.datetime, end_date__gte=start_date.datetime,
-                                                      abs_type__abbr='FOR', )
-                    for absence in absences:
-                        # absence
-                        # on cree le range de cette absence
-                        # abs_start_date = absence.start_date
-                        # abs_end_date = absence.end_date
-                        absence_range = absence.range_absence
+                    end_date = start_date.shift(years=1, days=-1).replace(hour=23, minute=59, second=59,
+                                                                          microsecond=999999)
 
-                        # on récupère que training est concerné par cette absence
-                        trs = Training.objects.filter(
-                            staff_id=absence.staff_id
-                        )
-                        if trs:
-                            absence_in_tr = Absence.objects.filter(
-                                staff_id=absence.staff_id,
-                                abs_type__abbr='FOR',
-                            )
-                            for tr in trs:
-                                # cree le total
-                                total_form = 0.0
+                    trs = Training.objects.filter(start_date__lte=end_date.date(), end_date__gte=start_date.date())
+                    if trs.exists():
+                        for tr in trs:
+                            # on cree le range du tr
+                            tr_start_datetime = utc_tz.localize(
+                                datetime.datetime.combine(tr.start_date, datetime.time(0, 0, 0, 0)))
+                            tr_end_datetime = utc_tz.localize(
+                                datetime.datetime.combine(tr.end_date, datetime.time(23, 59, 59, 999999)))
+                            tr_range = DateTimeRange(tr_start_datetime, tr_end_datetime)
 
-                                # on cree le range du tr
-                                tr_start_datetime = utc_tz.localize(
-                                    datetime.datetime.combine(tr.start_date, datetime.time(0, 0, 0, 0)))
-                                tr_end_datetime = utc_tz.localize(
-                                    datetime.datetime.combine(tr.end_date, datetime.time(23, 59, 59, 999999)))
-                                tr_range = DateTimeRange(tr_start_datetime, tr_end_datetime)
+                            absences = Absence.objects.filter(start_date__lte=tr_end_datetime,
+                                                              end_date__gte=tr_start_datetime,
+                                                              abs_type__abbr='FOR',
+                                                              staff__id=tr.staff_id)
+
+                            # cree le total
+                            total_form = 0.0
+
+                            for absence in absences:
+                                # absence
+                                # on cree le range de cette absence
+                                absence_range = absence.datetime_range
+
                                 # si l'absence est en interaction avec le tr
                                 if absence_range.is_intersection(tr_range):
-                                    for abs in absence_in_tr:
-                                        abs_range = abs.range_absence
-                                        if abs_range.is_intersection(tr_range):
-                                            for value in abs_range.range(datetime.timedelta(days=1)):
-                                                if tr_start_datetime <= value <= tr_end_datetime:
-                                                    if abs.all_day:
-                                                        total_form += 1
-                                                    else:
-                                                        total_form += 0.5
+                                    absence_in_tr = absence_range.intersection(tr_range)
+                                    for value in absence_in_tr.range(datetime.timedelta(days=1)):
+                                        if tr_start_datetime <= value <= tr_end_datetime:
+                                            if absence.all_day:
+                                                total_form += 1
+                                            else:
+                                                total_form += 0.5
 
-                                tr.number_days = total_form
-                                tr.save()
+                            tr.number_days = total_form
+                            tr.save()
                     logging.info(_("Staff training courses are updated for the year {}.".format(str(year))))
                     self.stdout.write(_("Staff training courses are updated for the year {}.".format(str(year))))
             else:

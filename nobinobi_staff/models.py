@@ -13,18 +13,20 @@
 #
 #  You should have received a copy of the GNU Affero General Public License
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
-
+import datetime
 import os
 import uuid
 
 import arrow
+import pytz
 from datetimerange import DateTimeRange
 from django.conf import settings
 from django.db import models
 from django.db.models.functions import Upper
 from django.utils.text import slugify
+from django.utils.timezone import make_aware
 from django.utils.translation import gettext_lazy as _
-from model_utils import Choices
+from model_utils import Choices, FieldTracker
 from model_utils.models import StatusField, TimeStampedModel, StatusModel
 
 GENDER_CHOICE = Choices(
@@ -183,6 +185,8 @@ class Absence(models.Model):
     partial_disability = models.IntegerField(_("Partial disability"), blank=True, null=True,
                                              help_text=_("In percentage %"))
 
+    tracker = FieldTracker()
+
     def __str__(self):
         """Return de str for absence
 
@@ -193,14 +197,9 @@ class Absence(models.Model):
             self.staff, self.abs_type, arrow.get(self.start_date).format("DD-MM-YYYY"),
             arrow.get(self.end_date).format("DD-MM-YYYY"))
 
-    def _get_range_absence(self):
-        """
-        Returns:
-            DateTimeRange:
-        """
+    @property
+    def datetime_range(self) -> DateTimeRange:
         return DateTimeRange(self.start_date, self.end_date)
-
-    range_absence = property(_get_range_absence)
 
 
 class AbsenceType(models.Model):
@@ -344,3 +343,11 @@ class Training(TimeStampedModel):
 
     def __str__(self):
         return "{} - {} - {}".format(self.staff.full_name, self.default_number_days, self.number_days)
+
+    @property
+    def datetime_range(self) -> DateTimeRange:
+        utc_tz = pytz.timezone("UTC")
+        return DateTimeRange(
+            make_aware(datetime.datetime.combine(self.start_date, datetime.time(0, 0, 0, 0)), utc_tz),
+            make_aware(datetime.datetime.combine(self.end_date, datetime.time(23, 59, 59, 999999)), utc_tz)
+        )

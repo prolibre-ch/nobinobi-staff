@@ -15,38 +15,35 @@
 import datetime
 
 import arrow
-import pytz
 from datetimerange import DateTimeRange
 from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 from django.utils import timezone
-from django.utils.timezone import make_aware, make_naive
 
 from nobinobi_staff.models import Staff, Training, RightTraining, Absence
 
 
-@receiver(post_save, sender=Staff)
-def update_training_for_staff(sender, instance, created, raw, using, **kwargs):
+def create_training_for_staff(instance: Staff):
     now = timezone.localdate()
     rt = RightTraining.objects.first()
     # +1 for accept 12 in range
     if rt:
         if rt.start_month in range(9, 12 + 1):
             if now.month in range(9, 13):
-                start_date = arrow.get(datetime.date(timezone.localdate().year, rt.start_month, rt.start_day))
+                start_date = datetime.date(timezone.localdate().year, rt.start_month, rt.start_day)
             else:
-                start_date = arrow.get(datetime.date(timezone.localdate().year - 1, rt.start_month, rt.start_day))
-            end_date = start_date.shift(years=1, days=-1)
+                start_date = datetime.date(timezone.localdate().year - 1, rt.start_month, rt.start_day)
         else:
             if now.month in range(9, 13):
                 start_date = arrow.get(datetime.datetime(timezone.localdate().year, rt.start_month, rt.start_day))
             else:
                 start_date = arrow.get(datetime.datetime(timezone.localdate().year - 1, rt.start_month, rt.start_day))
-            end_date = start_date.shift(years=1, days=-1)
+        end_date = arrow.get(start_date).shift(years=1, days=-1).date()
+
         training, created = Training.objects.get_or_create(
             staff=instance,
-            start_date=start_date.date(),
-            end_date=end_date.date(),
+            start_date=start_date,
+            end_date=end_date,
         )
         if created:
             ta = instance.percentage_work
@@ -54,74 +51,76 @@ def update_training_for_staff(sender, instance, created, raw, using, **kwargs):
             training.save()
 
 
+@receiver(post_save, sender=Staff)
+def update_training_for_staff(sender, instance, created, raw, using, **kwargs):
+    create_training_for_staff(instance)
+
+
 @receiver(post_save, sender=Absence)
 def create_training_for_staff_after_absence(sender, instance, created, raw, using, **kwargs):
-    now = timezone.localdate()
-    rt = RightTraining.objects.first()
-    # +1 for accept 12 in range
-    if rt:
-        if rt.start_month in range(9, 12 + 1):
-            if now.month in range(9, 13):
-                start_date = arrow.get(datetime.date(timezone.localdate().year, rt.start_month, rt.start_day))
-            else:
-                start_date = arrow.get(datetime.date(timezone.localdate().year - 1, rt.start_month, rt.start_day))
-            end_date = start_date.shift(years=1, days=-1)
-        else:
-            if now.month in range(9, 13):
-                start_date = arrow.get(datetime.datetime(timezone.localdate().year, rt.start_month, rt.start_day))
-            else:
-                start_date = arrow.get(datetime.datetime(timezone.localdate().year - 1, rt.start_month, rt.start_day))
-            end_date = start_date.shift(years=1, days=-1)
-        training, created = Training.objects.get_or_create(
-            staff=instance.staff,
-            start_date=start_date.date(),
-            end_date=end_date.date(),
-        )
-        if created:
-            ta = instance.staff.percentage_work
-            training.default_number_days = (rt.number_days * ta) / 100
-            training.save()
+    create_training_for_staff(instance.staff)
 
 
-@receiver((post_save, post_delete), sender=Absence)
+@receiver(post_save, sender=Absence)
 def update_training_for_staff_after_absence(sender, instance, **kwargs):
-    # absence
-    absence = instance
-
     # on cree le range de cette absence
     # abs_start_date = absence.start_date
     # abs_end_date = absence.end_date
-    absence_range = absence.range_absence
+    if instance.abs_type.abbr == "FOR":
+        absence_range = instance.datetime_range
 
-    # on récupère que training est concerné par cette absence
-    trs = Training.objects.filter(
-        staff_id=instance.staff_id
-    )
-    utc_tz = pytz.timezone("UTC")
-    if trs:
-        absence_in_tr = Absence.objects.filter(
-            staff_id=instance.staff_id,
-            abs_type__abbr='FOR',
-        )
-        for tr in trs:
-            # cree le total
-            total_form = 0.0
+        old_absence_start_date = instance.tracker.previous("start_date")
+        old_absence_end_date = instance.tracker.previous("end_date")
+        old_absence_range = DateTimeRange(old_absence_start_date, old_absence_end_date)
 
-            # on cree le range du tr
-            tr_start_datetime = utc_tz.localize(datetime.datetime.combine(tr.start_date, datetime.time(0, 0, 0, 0)))
-            tr_end_datetime = utc_tz.localize(datetime.datetime.combine(tr.end_date, datetime.time(23, 59, 59, 999999)))
-            tr_range = DateTimeRange(tr_start_datetime, tr_end_datetime)
-            # si l'absence est en interaction avec le tr
-            if absence_range.is_intersection(tr_range):
-                for abs in absence_in_tr:
-                    abs_range = abs.range_absence
-                    if abs_range.is_intersection(tr_range):
-                        for value in abs_range.range(datetime.timedelta(days=1)):
-                            if tr_start_datetime <= value <= tr_end_datetime:
-                                if abs.all_day:
-                                    total_form += 1
+        if absence_range != old_absence_range:
+            # on récupère que training est concerné par cette absence
+            trs = Training.objects.filter(
+                staff_id=instance.staff_id
+            )
+            if trs:
+                for tr in trs:
+                    # cree le total
+                    tr_range = tr.datetime_range
+                    # si l'absence est en interaction avec le tr
+                    if absence_range.is_intersection(tr_range):
+                        for value in absence_range.range(datetime.timedelta(days=1)):
+                            if tr_range.start_datetime <= value <= tr_range.end_datetime:
+                                if instance.all_day:
+                                    tr.number_days += 1
                                 else:
-                                    total_form += 0.5
+                                    tr.number_days += 0.5
+                        tr.save()
+                    if old_absence_start_date and old_absence_end_date:
+                        if old_absence_range.is_intersection(tr_range):
+                            for value in old_absence_range.range(datetime.timedelta(days=1)):
+                                if tr_range.start_datetime <= value <= tr_range.end_datetime:
+                                    if instance.all_day:
+                                        tr.number_days -= 1
+                                    else:
+                                        tr.number_days -= 0.5
+                            tr.save()
 
-            tr.number_days = total_form
-            tr.save()
+
+@receiver(post_delete, sender=Absence)
+def update_training_for_staff_after_absence(sender, instance, **kwargs):
+    # on cree le range de cette absence
+    if instance.abs_type.abbr == "FOR":
+        absence_range = instance.datetime_range
+        # on récupère que training est concerné par cette absence
+        trs = Training.objects.filter(
+            staff_id=instance.staff_id
+        )
+        if trs:
+            for tr in trs:
+                # cree le total
+                tr_range = tr.datetime_range
+                # si l'absence est en interaction avec le tr
+                if absence_range.is_intersection(tr_range):
+                    for value in absence_range.range(datetime.timedelta(days=1)):
+                        if tr_range.start_datetime <= value <= tr_range.end_datetime:
+                            if instance.all_day:
+                                tr.number_days -= 1
+                            else:
+                                tr.number_days -= 0.5
+                    tr.save()
