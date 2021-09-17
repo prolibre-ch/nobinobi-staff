@@ -3,6 +3,13 @@
 History
 -------
 
+0.1.6.4 (2021-09-17)
++++++++++++++++++++++
+
+* 7599706 - Update traduction
+* 0581582 - Update system to generate and update training auto
+* a60c325 - Add default_auto_field
+
 0.1.6.3 (2021-09-16)
 +++++++++++++++++++++
 
