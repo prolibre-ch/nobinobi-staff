@@ -3,6 +3,12 @@
 History
 -------
 
+0.1.6.5 (2021-09-17)
++++++++++++++++++++++
+
+* c4dd7a1 - Add search field for training
+* 3a28df3 - Fix error with generate command when staffs args filled
+
 0.1.6.4 (2021-09-17)
 +++++++++++++++++++++
 
