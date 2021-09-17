@@ -41,6 +41,7 @@ class NobinobiStaffConfig(AppConfig, object):
     name = 'nobinobi_staff'
     verbose_name = _("Staff")
     verbose_name_plural = _("Staffes")
+    default_auto_field = 'django.db.models.AutoField'
 
     def ready(self):
         import nobinobi_staff.signals
