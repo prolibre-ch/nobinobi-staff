@@ -235,4 +235,5 @@ class TrainingAdmin(admin.ModelAdmin):
     readonly_fields = ("default_number_days", "start_date", "end_date", "staff")
     fields = ("default_number_days", "number_days", "start_date", "end_date", "staff")
     list_display = ("staff", "start_date", "end_date", "default_number_days", "number_days")
-    list_filter = ('staff', ('start_date', DateRangeFilter), ('end_date', DateRangeFilter))
+    list_filter = (('start_date', DateRangeFilter), ('end_date', DateRangeFilter))
+    search_fields = ("staff",)
