@@ -54,13 +54,15 @@ class Command(BaseCommand):
                         end_date=end_date.date(),
                     )
                     if created:
-                        ta = staff.percentage_work
-                        training.default_number_days = (rt.number_days * ta) / 100
+                        st = Staff.objects.get(id__exact=staff)
+                        training.default_number_days = (rt.number_days * st.percentage_work) / 100
                         training.save()
                         logging.info(
-                            _("Staff ID:{} training courses are created for the year {}.".format(str(staff), str(year))))
+                            _("Staff {0} training courses are created for the year {1}.".format(st.full_name,
+                                                                                                str(year))))
                         self.stdout.write(
-                            _("Staff ID: {} training courses are created for the year {}.".format(str(staff), str(year))))
+                            _("Staff {0} training courses are created for the year {1}.".format(st.full_name,
+                                                                                                str(year))))
         else:
             logging.info(_("There's no right to information training."))
             self.stdout.write(_("There's no right to information training."))
