@@ -3,8 +3,14 @@
 History
 -------
 
+0.1.6.5.2 (2021-09-29)
+++++++++++++++++++++++
+
+* 022c118 - Fix import missing in commands
+* Update requirements
+
 0.1.6.5.1 (2021-09-17)
-+++++++++++++++++++++
+++++++++++++++++++++++
 
 * 002cb4c - fix bug with search field icontains
 

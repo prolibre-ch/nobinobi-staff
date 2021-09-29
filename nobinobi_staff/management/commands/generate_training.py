@@ -18,6 +18,7 @@ import logging
 import arrow
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.management.base import BaseCommand
+from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
 from nobinobi_staff.models import RightTraining, Staff, Training
