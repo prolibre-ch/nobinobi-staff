@@ -5,7 +5,7 @@ arrow==1.2.1
 django-crispy-forms==1.13.0
 django-extensions==3.1.5
 django-bootstrap-datepicker-plus==4.0.0
-django-admin-rangefilter==0.8.1
+django-admin-rangefilter==0.8.2
 DateTimeRange==1.0.0
 djangorestframework-datatables==0.5.2
 Pillow==8.3.2
