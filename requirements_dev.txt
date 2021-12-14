@@ -1,16 +1,16 @@
 invoke==1.6.0
-twine==3.4.2
-zest.releaser==6.22.1
+twine==3.7.1
+zest.releaser==6.22.2
 
 wheel==0.37.0
-django-model-utils==4.1.1
+django-model-utils==4.2.0
 
-Werkzeug==2.0.1  # https://github.com/pallets/werkzeug
+Werkzeug==2.0.2  # https://github.com/pallets/werkzeug
 ipdb==0.13.9  # https://github.com/gotcha/ipdb
 
 # Code quality
 # ------------------------------------------------------------------------------
-flake8==3.9.2  # https://github.com/PyCQA/flake8
+flake8==4.0.1  # https://github.com/PyCQA/flake8
 coverage==5.5  # https://github.com/nedbat/coveragepy
 
 # Django
