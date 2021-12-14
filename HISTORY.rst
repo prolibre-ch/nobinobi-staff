@@ -3,6 +3,13 @@
 History
 -------
 
+0.1.6.6 (2021-12-14)
+++++++++++++++++++++++
+
+* 7562c55 - Change str format in full name by last_name - first_name
+* 78bf3e3 - Fix error import
+* Update requirements
+
 0.1.6.5.2 (2021-09-29)
 ++++++++++++++++++++++
 
