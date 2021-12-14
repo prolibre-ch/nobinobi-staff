@@ -114,11 +114,11 @@ class Staff(TimeStampedModel, StatusModel):
     @property
     def full_name(self):
         """Get fullname of staff"""
-        return "{0} {1}".format(self.first_name, self.last_name)
+        return "{0} {1}".format(self.last_name, self.first_name)
 
     def __str__(self):  # __unicode__ on Python 2
         """Returns the staff's full name."""
-        return '%s %s' % (self.first_name, self.last_name)  #
+        return self.full_name
 
     def save(self, *args, **kwargs):
         """Save the Staff models
@@ -142,7 +142,7 @@ class Staff(TimeStampedModel, StatusModel):
 
     class Meta:
         """Set information of class Staff"""
-        ordering = ['first_name', 'last_name']
+        ordering = ['last_name', 'first_name']
         verbose_name_plural = _("Staffes")
         verbose_name = _("Staff")
         permissions = (("can_read_list", "Can read list"),)
