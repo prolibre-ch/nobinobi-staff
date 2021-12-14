@@ -13,12 +13,11 @@
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import arrow
-from bootstrap_datepicker_plus import DatePickerInput
 from datetimerange import DateTimeRange
 from django import forms
 from django.contrib.admin.widgets import AdminDateWidget
-from django.utils import timezone
 from django.utils.translation import gettext as _
+
 from nobinobi_staff.models import Absence, RightTraining
 
 
