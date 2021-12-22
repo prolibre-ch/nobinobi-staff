@@ -3,6 +3,12 @@
 History
 -------
 
+0.1.6.7 (2021-12-22)
+++++++++++++++++++++++
+
+* c19f6cb - Filter by default to staff active in list admin
+* dd97bda - Fix requirements
+
 0.1.6.6 (2021-12-14)
 ++++++++++++++++++++++
 
