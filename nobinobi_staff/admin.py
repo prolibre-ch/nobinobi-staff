@@ -16,9 +16,10 @@
 
 import arrow
 from django.contrib import admin, messages
-from django.contrib.admin import StackedInline
+from django.contrib.admin import StackedInline, SimpleListFilter
 from django.core.exceptions import ValidationError, NON_FIELD_ERRORS
 from django.forms import BaseInlineFormSet
+from django.utils.encoding import force_text
 from django.utils.translation import gettext as _
 from import_export import resources
 from import_export.admin import ExportActionMixin
@@ -28,6 +29,49 @@ from rangefilter.filter import DateRangeFilter
 
 from nobinobi_staff.forms import AbsenceAdminForm, RightTrainingAdminForm
 from .models import Absence, Qualification, Team, Staff, AbsenceType, AbsenceAttachment, Training, RightTraining
+
+
+class DefaultListFilter(SimpleListFilter):
+    all_value = '_all'
+
+    def default_value(self):
+        raise NotImplementedError()
+
+    def queryset(self, request, queryset):
+        if self.parameter_name in request.GET and request.GET[self.parameter_name] == self.all_value:
+            return queryset
+
+        if self.parameter_name in request.GET:
+            return queryset.filter(**{self.parameter_name: request.GET[self.parameter_name]})
+
+        return queryset.filter(**{self.parameter_name: self.default_value()})
+
+    def choices(self, cl):
+        yield {
+            'selected': self.value() == self.all_value,
+            'query_string': cl.get_query_string({self.parameter_name: self.all_value}, []),
+            'display': _('All'),
+        }
+        for lookup, title in self.lookup_choices:
+            yield {
+                'selected': self.value() == force_text(lookup) or (
+                    self.value() == None and force_text(self.default_value()) == force_text(lookup)),
+                'query_string': cl.get_query_string({
+                    self.parameter_name: lookup,
+                }, []),
+                'display': title,
+            }
+
+
+class StatusFilter(DefaultListFilter):
+    title = _('Status')
+    parameter_name = 'status__exact'
+
+    def lookups(self, request, model_admin):
+        return Staff.STATUS
+
+    def default_value(self):
+        return "active"
 
 
 class InlineAbsenceFormset(BaseInlineFormSet):
@@ -109,7 +153,7 @@ class StaffAdmin(admin.ModelAdmin):
     list_display = (
         'last_name', 'first_name', 'qualification', 'percentage_work', 'working_time', 'status'
     )
-    list_filter = ('status', 'gender', 'civil_status', "team", "qualification", "arrival_date", "departure_date")
+    list_filter = (StatusFilter, 'gender', 'civil_status', "team", "qualification", "arrival_date", "departure_date")
     ordering = ('last_name',)
     inlines = (AbsenceInline,)
     search_fields = ('last_name', 'first_name', "birth_date", "social_security_number", "email",)
