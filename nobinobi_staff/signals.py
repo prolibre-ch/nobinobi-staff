@@ -62,6 +62,8 @@ def create_training_for_staff(instance: Staff, absence: Absence = None):
 @receiver(post_save, sender=Staff)
 def update_training_for_staff(sender, instance, created, raw, using, **kwargs):
     create_training_for_staff(instance)
+    year = timezone.localdate().year
+    call_command('update_training', years=[year], staffs=[instance.id])
 
 
 @receiver(post_save, sender=Absence)
