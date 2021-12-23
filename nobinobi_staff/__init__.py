@@ -9,5 +9,5 @@
 #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #  GNU Affero General Public License for more details.
 
-__version__ = "0.1.6.7"
+__version__ = "0.1.6.8"
 default_app_config = 'nobinobi_staff.apps.NobinobiStaffConfig'
