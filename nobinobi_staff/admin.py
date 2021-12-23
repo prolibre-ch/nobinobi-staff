@@ -243,6 +243,11 @@ class AbsenceAdmin(ExportActionMixin, admin.ModelAdmin):
          }),
     ]
 
+    def get_form(self, request, obj=None, **kwargs):
+        form = super(AbsenceAdmin, self).get_form(request, obj, **kwargs)
+        form.base_fields['staff'].queryset = Staff.objects.filter(status__exact='active')
+        return form
+
 
 @admin.register(AbsenceType)
 class AbsenceTypeAdmin(admin.ModelAdmin):
