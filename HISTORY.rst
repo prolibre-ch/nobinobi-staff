@@ -3,6 +3,12 @@
 History
 -------
 
+0.1.6.8 (2021-12-23)
+++++++++++++++++++++++
+
+* 879490a - filter on choice staff absence only active staff
+* d04ba24 - Fix bug when save staff for training
+
 0.1.6.7 (2021-12-22)
 ++++++++++++++++++++++
 
