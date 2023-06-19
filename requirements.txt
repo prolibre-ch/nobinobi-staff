@@ -1,10 +1,10 @@
-datetimerange==2.1.0 ; python_full_version >= "3.8.1" and python_full_version < "4.0.0"
-django-admin-rangefilter==0.10.0 ; python_full_version >= "3.8.1" and python_full_version < "4.0.0"
-django-bootstrap-datepicker-plus==5.0.3 ; python_full_version >= "3.8.1" and python_version < "4.0"
-django-extensions==3.2.3 ; python_full_version >= "3.8.1" and python_full_version < "4.0.0"
-django-import-export==3.2.0 ; python_full_version >= "3.8.1" and python_full_version < "4.0.0"
-djangorestframework-datatables==0.7.0 ; python_full_version >= "3.8.1" and python_full_version < "4.0.0"
-djangorestframework==3.14.0 ; python_full_version >= "3.8.1" and python_full_version < "4.0.0"
-nobinobi-core==0.1.4.7 ; python_full_version >= "3.8.1" and python_full_version < "4.0.0"
-pillow==9.5.0 ; python_full_version >= "3.8.1" and python_full_version < "4.0.0"
-python-dateutil==2.8.2 ; python_full_version >= "3.8.1" and python_full_version < "4.0.0"
+datetimerange==2.1.0
+django-admin-rangefilter==0.10.0
+django-bootstrap-datepicker-plus==5.0.3
+django-extensions==3.2.3
+django-import-export==3.2.0
+djangorestframework-datatables==0.7.0
+djangorestframework==3.14.0
+nobinobi-core==0.1.4.8
+pillow==9.5.0
+python-dateutil==2.8.2
