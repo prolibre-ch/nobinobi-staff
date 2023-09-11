@@ -5,7 +5,7 @@ zest.releaser==9.0.0
 wheel==0.41.2
 django-model-utils==4.3.1
 
-Werkzeug==2.3.6  # https://github.com/pallets/werkzeug
+Werkzeug==2.3.7  # https://github.com/pallets/werkzeug
 ipdb==0.13.13  # https://github.com/gotcha/ipdb
 
 # Code quality
