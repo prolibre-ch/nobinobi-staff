@@ -1,6 +1,6 @@
 datetimerange==2.2.1
 django-admin-rangefilter==0.12.4
-django-bootstrap-datepicker-plus==5.0.3
+django-bootstrap-datepicker-plus==5.0.5
 django-extensions==3.2.3
 django-import-export==3.2.0
 djangorestframework-datatables==0.7.0
