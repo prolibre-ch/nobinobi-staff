@@ -1,4 +1,4 @@
-datetimerange==2.1.0
+datetimerange==2.2.1
 django-admin-rangefilter==0.10.0
 django-bootstrap-datepicker-plus==5.0.3
 django-extensions==3.2.3
