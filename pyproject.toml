@@ -33,6 +33,7 @@ tox = "^4.23.0"
 codecov = "^2.1.13"
 pylint = "^3.3.1"
 pre-commit = "^4.0.1"
+bump2version = "^1.0.1"
 
 [build-system]
 requires = ["poetry-core"]
