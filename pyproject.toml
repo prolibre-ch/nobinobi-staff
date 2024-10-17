@@ -1,0 +1,40 @@
+[tool.poetry]
+name = "nobinobi-staff"
+version = "0.1.6.10"
+description = ""
+authors = ["Florian Alu <fla@grapps.fr>"]
+readme = "README.rst"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+django = "^3.0"
+nobinobi-core = "^0.1.4.9"
+datetimerange = "^2.3.0"
+django-admin-rangefilter = "^0.13.2"
+django-bootstrap-datepicker-plus = "^5.0.5"
+django-extensions = "^3.2.3"
+django-import-export = "^3.0.0"
+djangorestframework-datatables = "^0.7.2"
+djangorestframework = "^3.0"
+pillow = "^11.0.0"
+python-dateutil = "^2.9.0.post0"
+
+[tool.poetry.group.dev.dependencies]
+invoke = "^2.2.0"
+ipdb = "^0.13.13"
+flake8 = "^7.1.1"
+coverage = "^7.6.3"
+factory-boy = "^3.3.1"
+django-test-plus = "^2.2.4"
+django-debug-toolbar = "^4.1.0"
+pytest-django = "^4.9.0"
+mock = "^5.1.0"
+tox = "^4.23.0"
+codecov = "^2.1.13"
+pylint = "^3.3.1"
+pre-commit = "^4.0.1"
+bump2version = "^1.0.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

@@ -3,6 +3,14 @@
 History
 -------
 
+0.1.6.11 (2024-10-18)
+++++++++++++++++++++++
+* 2ccf3de - Add bump2version to dev requirements
+* 986ce77 - ignore DB
+* bcead03 - Fix requirements
+* 53d8592 - Fix bug with django-admin-rangefilter
+* Update requirements
+
 0.1.6.10 (2023-06-19)
 ++++++++++++++++++++++
 

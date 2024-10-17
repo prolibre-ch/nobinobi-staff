@@ -1,22 +1,80 @@
-invoke==2.1.2
-twine==4.0.2
-zest.releaser==8.0.0
-
-wheel==0.40.0
-django-model-utils==4.3.1
-
-Werkzeug==2.3.6  # https://github.com/pallets/werkzeug
-ipdb==0.13.13  # https://github.com/gotcha/ipdb
-
-# Code quality
-# ------------------------------------------------------------------------------
-flake8==6.0.0  # https://github.com/PyCQA/flake8
-coverage==7.2.7  # https://github.com/nedbat/coveragepy
-
-# Django
-# ------------------------------------------------------------------------------
-factory-boy==3.2.1  # https://github.com/FactoryBoy/factory_boy
-django-test-plus==2.2.1  # https://github.com/revsys/django-test-plus
-
-django-debug-toolbar==4.1.0  # https://github.com/jazzband/django-debug-toolbar
-pytest-django==4.5.2  # https://github.com/pytest-dev/pytest-django
+annotated-types==0.7.0 ; python_version >= "3.12" and python_version < "4.0"
+arrow==1.3.0 ; python_version >= "3.12" and python_version < "4.0"
+asgiref==3.8.1 ; python_version >= "3.12" and python_version < "4.0"
+astroid==3.3.5 ; python_version >= "3.12" and python_version < "4.0"
+asttokens==2.4.1 ; python_version >= "3.12" and python_version < "4.0"
+cachetools==5.5.0 ; python_version >= "3.12" and python_version < "4.0"
+certifi==2024.8.30 ; python_version >= "3.12" and python_version < "4.0"
+chardet==5.2.0 ; python_version >= "3.12" and python_version < "4.0"
+charset-normalizer==3.4.0 ; python_version >= "3.12" and python_version < "4.0"
+codecov==2.1.13 ; python_version >= "3.12" and python_version < "4.0"
+colorama==0.4.6 ; python_version >= "3.12" and python_version < "4.0"
+coverage==7.6.3 ; python_version >= "3.12" and python_version < "4.0"
+crispy-bootstrap5==0.7 ; python_version >= "3.12" and python_version < "4.0"
+datetimerange==2.3.0 ; python_version >= "3.12" and python_version < "4.0"
+decorator==5.1.1 ; python_version >= "3.12" and python_version < "4.0"
+diff-match-patch==20230430 ; python_version >= "3.12" and python_version < "4.0"
+dill==0.3.9 ; python_version >= "3.12" and python_version < "4.0"
+distlib==0.3.9 ; python_version >= "3.12" and python_version < "4.0"
+django-admin-rangefilter==0.13.2 ; python_version >= "3.12" and python_version < "4.0"
+django-bootstrap-datepicker-plus==5.0.5 ; python_version >= "3.12" and python_version < "4.0"
+django-crispy-forms==2.0 ; python_version >= "3.12" and python_version < "4.0"
+django-debug-toolbar==4.1.0 ; python_version >= "3.12" and python_version < "4.0"
+django-extensions==3.2.3 ; python_version >= "3.12" and python_version < "4.0"
+django-import-export==4.1.1 ; python_version >= "3.12" and python_version < "4.0"
+django-model-utils==5.0.0 ; python_version >= "3.12" and python_version < "4.0"
+django-test-plus==2.2.4 ; python_version >= "3.12" and python_version < "4.0"
+django==3.2.25 ; python_version >= "3.12" and python_version < "4.0"
+djangorestframework-datatables==0.7.2 ; python_version >= "3.12" and python_version < "4.0"
+djangorestframework==3.15.1 ; python_version >= "3.12" and python_version < "4.0"
+executing==2.1.0 ; python_version >= "3.12" and python_version < "4.0"
+factory-boy==3.3.1 ; python_version >= "3.12" and python_version < "4.0"
+faker==30.6.0 ; python_version >= "3.12" and python_version < "4.0"
+filelock==3.16.1 ; python_version >= "3.12" and python_version < "4.0"
+flake8==7.1.1 ; python_version >= "3.12" and python_version < "4.0"
+idna==3.10 ; python_version >= "3.12" and python_version < "4.0"
+iniconfig==2.0.0 ; python_version >= "3.12" and python_version < "4.0"
+invoke==2.2.0 ; python_version >= "3.12" and python_version < "4.0"
+ipdb==0.13.13 ; python_version >= "3.12" and python_version < "4.0"
+ipython==8.28.0 ; python_version >= "3.12" and python_version < "4.0"
+isort==5.13.2 ; python_version >= "3.12" and python_version < "4.0"
+jedi==0.19.1 ; python_version >= "3.12" and python_version < "4.0"
+matplotlib-inline==0.1.7 ; python_version >= "3.12" and python_version < "4.0"
+mbstrdecoder==1.1.3 ; python_version >= "3.12" and python_version < "4.0"
+mccabe==0.7.0 ; python_version >= "3.12" and python_version < "4.0"
+mock==5.1.0 ; python_version >= "3.12" and python_version < "4.0"
+nobinobi-core==0.1.4.9 ; python_version >= "3.12" and python_version < "4.0"
+packaging==24.1 ; python_version >= "3.12" and python_version < "4.0"
+parso==0.8.4 ; python_version >= "3.12" and python_version < "4.0"
+pexpect==4.9.0 ; python_version >= "3.12" and python_version < "4.0" and (sys_platform != "win32" and sys_platform != "emscripten")
+pillow==11.0.0 ; python_version >= "3.12" and python_version < "4.0"
+platformdirs==4.3.6 ; python_version >= "3.12" and python_version < "4.0"
+pluggy==1.5.0 ; python_version >= "3.12" and python_version < "4.0"
+prompt-toolkit==3.0.48 ; python_version >= "3.12" and python_version < "4.0"
+ptyprocess==0.7.0 ; python_version >= "3.12" and python_version < "4.0" and (sys_platform != "win32" and sys_platform != "emscripten")
+pure-eval==0.2.3 ; python_version >= "3.12" and python_version < "4.0"
+pycodestyle==2.12.1 ; python_version >= "3.12" and python_version < "4.0"
+pydantic-core==2.23.4 ; python_version >= "3.12" and python_version < "4.0"
+pydantic==2.9.2 ; python_version >= "3.12" and python_version < "4.0"
+pyflakes==3.2.0 ; python_version >= "3.12" and python_version < "4.0"
+pygments==2.18.0 ; python_version >= "3.12" and python_version < "4.0"
+pylint==3.3.1 ; python_version >= "3.12" and python_version < "4.0"
+pyproject-api==1.8.0 ; python_version >= "3.12" and python_version < "4.0"
+pytest-django==4.9.0 ; python_version >= "3.12" and python_version < "4.0"
+pytest==8.3.3 ; python_version >= "3.12" and python_version < "4.0"
+python-dateutil==2.9.0.post0 ; python_version >= "3.12" and python_version < "4.0"
+pytz==2024.2 ; python_version >= "3.12" and python_version < "4.0"
+requests==2.32.3 ; python_version >= "3.12" and python_version < "4.0"
+six==1.16.0 ; python_version >= "3.12" and python_version < "4.0"
+sqlparse==0.5.1 ; python_version >= "3.12" and python_version < "4.0"
+stack-data==0.6.3 ; python_version >= "3.12" and python_version < "4.0"
+tablib==3.5.0 ; python_version >= "3.12" and python_version < "4.0"
+tomlkit==0.13.2 ; python_version >= "3.12" and python_version < "4.0"
+tox==4.23.0 ; python_version >= "3.12" and python_version < "4.0"
+traitlets==5.14.3 ; python_version >= "3.12" and python_version < "4.0"
+typepy[datetime]==1.3.2 ; python_version >= "3.12" and python_version < "4.0"
+types-python-dateutil==2.9.0.20241003 ; python_version >= "3.12" and python_version < "4.0"
+typing-extensions==4.12.2 ; python_version >= "3.12" and python_version < "4.0"
+urllib3==2.2.3 ; python_version >= "3.12" and python_version < "4.0"
+virtualenv==20.26.6 ; python_version >= "3.12" and python_version < "4.0"
+wcwidth==0.2.13 ; python_version >= "3.12" and python_version < "4.0"
