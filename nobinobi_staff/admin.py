@@ -22,10 +22,10 @@ from django.forms import BaseInlineFormSet
 from django.utils.encoding import force_text
 from django.utils.translation import gettext as _
 from import_export import resources
-from import_export.admin import ExportActionMixin
+from import_export.admin import ExportActionMixin, ExportActionModelAdmin
 from import_export.fields import Field
 from nobinobi_core.functions import AdminInlineWithSelectRelated
-from rangefilter.filter import DateRangeFilter
+from rangefilter.filters import DateRangeFilter
 
 from nobinobi_staff.forms import AbsenceAdminForm, RightTrainingAdminForm
 from .models import Absence, Qualification, Team, Staff, AbsenceType, AbsenceAttachment, Training, RightTraining
@@ -219,7 +219,7 @@ class StaffAdmin(admin.ModelAdmin):
 
 
 @admin.register(Absence)
-class AbsenceAdmin(ExportActionMixin, admin.ModelAdmin):
+class AbsenceAdmin(ExportActionModelAdmin):
     form = AbsenceAdminForm
     inlines = (AbsenceAttachmentInline,)
     resource_class = AbsenceResource
