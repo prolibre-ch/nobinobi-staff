@@ -3,6 +3,10 @@
 History
 -------
 
+0.1.6.12 (2024-10-18)
+++++++++++++++++++++++
+* Fix bug python version
+
 0.1.6.11 (2024-10-18)
 ++++++++++++++++++++++
 * 2ccf3de - Add bump2version to dev requirements
